@@ -15,6 +15,7 @@ app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.send('API is running'));
 app.use('/api/users', require('./routes/Users'));
 app.use('/api/auth', require('./routes/Auth'));
+app.use('/api/post', require('./routes/Post'));
 
 const server = http.createServer(app);
 
