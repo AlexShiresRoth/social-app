@@ -4,7 +4,7 @@ import Layout from '../layout/Layout';
 
 const Login = () => {
 	return (
-		<div>
+		<>
 			<Head>
 				<title>Syndicate App:Login</title>
 			</Head>
@@ -12,7 +12,7 @@ const Login = () => {
 			<Layout>
 				<h1>Login to your account</h1>
 			</Layout>
-		</div>
+		</>
 	);
 };
 

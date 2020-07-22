@@ -1,17 +1,24 @@
 {
-  "name": "learn-starter",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "date-fns": "^2.14.0",
-    "next": "9.3.5",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+	"name": "learn-starter",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"compile:sass": "node-sass --include-path sass sass/main.scss   src/css/main.css"
+	},
+	"dependencies": {
+		"axios": "^0.19.2",
+		"date-fns": "^2.14.0",
+		"next": "9.3.5",
+		"next-redux-wrapper": "^6.0.2",
+		"node-sass": "^4.14.1",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"react-redux": "^7.2.0",
+		"redux": "^4.0.5",
+		"redux-devtools-extension": "^2.13.8",
+		"redux-thunk": "^2.3.0"
+	}
 }

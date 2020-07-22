@@ -1,15 +1,18 @@
 import Head from 'next/head';
 import Layout from '../layout/Layout';
+import Header from '../components/landing/Header';
 
-export default function Home() {
+const Home = () => {
 	return (
 		<>
 			<Head>
 				<title>Syndicate App</title>
 			</Head>
 			<Layout>
-				<h1>Syndicate App</h1>
+				<Header />
 			</Layout>
 		</>
 	);
-}
+};
+
+export default Home;

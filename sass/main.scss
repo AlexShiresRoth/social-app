@@ -1,0 +1,20 @@
+@import url('https://use.typekit.net/rvn0bbq.css');
+
+@import './variables';
+
+html,
+body {
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+a,
+p,
+button,
+li {
+	font-family: futura-pt, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 16px;
+}
