@@ -20,12 +20,18 @@
 				font-style: normal;
 				color: $brand-main;
 				font-size: 1.5rem;
+				& img {
+					max-width: 10rem;
+				}
 			}
 		}
 		& .nav_right {
 			& a {
 				text-decoration: none;
 				margin: 0 0.5rem;
+				&:hover {
+					cursor: pointer;
+				}
 			}
 		}
 	}

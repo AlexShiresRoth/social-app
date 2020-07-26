@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 const config = require('config');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
@@ -75,5 +76,23 @@ router.post(
 		}
 	}
 );
+
+//@route GET ROUTE
+//@desc get user
+//@access private
+router.get('/', auth, async (req, res) => {
+	const foundUser = await User.findById(req.user.id).select('-password');
+
+	if (!foundUser) {
+		return res.status(400).json({ msg: 'Could not locate a user' });
+	}
+
+	try {
+		res.json(foundUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Internal Server Error' });
+	}
+});
 
 module.exports = router;

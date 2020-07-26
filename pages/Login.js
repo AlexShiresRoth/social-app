@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Layout from '../layout/Layout';
+import LoginForm from '../components/login/LoginForm';
 
 const Login = () => {
 	return (
@@ -10,7 +11,7 @@ const Login = () => {
 			</Head>
 
 			<Layout>
-				<h1>Login to your account</h1>
+				<LoginForm />
 			</Layout>
 		</>
 	);

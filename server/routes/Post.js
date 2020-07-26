@@ -33,4 +33,32 @@ router.post('/', auth, [check('text', 'Please add some text to your post').not()
 	}
 });
 
+//@route PUT route
+//@desc like post
+//@access private
+
+//TODO test this route
+router.put('/post/:id', auth, async (req, res) => {
+	const foundPost = await Post.findById(req.params.id);
+
+	if (!foundPost) {
+		return res.status(400).json({ msg: 'Could not locate post' });
+	}
+
+	if (foundPost.likes.filter((post) => post.user === req.user.id).length > 0) {
+		foundPost.likes.filter((post) => post.user !== req.user.id);
+		await foundPost.save();
+		return res.json(foundPost);
+	}
+
+	try {
+		foundPost.likes.push(req.user);
+		await foundPost.save();
+		res.json(foundPost);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json({ msg: 'Internal Server Errror' });
+	}
+});
+
 module.exports = router;

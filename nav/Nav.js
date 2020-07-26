@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import style from './Nav.module.scss';
 import { connect } from 'react-redux';
+import { logout } from '../components/actions/auth';
 
-const Nav = ({ auth: { isAuthenticated, loading } }) => {
+const Nav = ({ auth: { isAuthenticated, loading }, logout }) => {
 	console.log(isAuthenticated);
 	const unAuthorizedLinks = (
 		<div className={style.nav_right}>
@@ -30,9 +31,8 @@ const Nav = ({ auth: { isAuthenticated, loading } }) => {
 			<Link href="/newpost" as={`/createpost`}>
 				<a>+Post</a>
 			</Link>
-			<Link href="/signup">
-				<a>Logout</a>
-			</Link>
+
+			<a onClick={(e) => logout()}>Logout</a>
 		</div>
 	);
 	return (
@@ -40,7 +40,11 @@ const Nav = ({ auth: { isAuthenticated, loading } }) => {
 			<div className={style.inner}>
 				<div className={style.nav_left}>
 					<Link href="/" as={`/`}>
-						<a>Syndicate</a>
+						<a>
+							<img
+								src={`https://res.cloudinary.com/snackmanproductions/image/upload/v1595728394/social-app/syndicate-logo_qfxpd8.png`}
+							/>
+						</a>
 					</Link>
 				</div>
 				{!isAuthenticated ? unAuthorizedLinks : authorizedLinks}
@@ -57,4 +61,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, null)(Nav);
+export default connect(mapStateToProps, { logout })(Nav);

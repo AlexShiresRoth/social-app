@@ -1,0 +1,60 @@
+@import '../../sass/variables';
+
+.section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 100vh;
+	background: $brand-main-faded;
+	& .form {
+		background: #fff;
+		padding: 2rem;
+		box-shadow: 0 1px 25px darken($brand-main-faded, 15%);
+		border-radius: 5px;
+		min-width: 20vw;
+		& .inner {
+			display: flex;
+			flex-direction: column;
+			& .logo_container {
+				max-width: 80%;
+			}
+			& .input_col {
+				display: flex;
+				flex-direction: column;
+				margin: 1rem 0;
+				& label {
+					color: $brand-main;
+					margin: 0.5rem 0;
+				}
+				& input {
+					background: $brand-main-faded;
+					border: 3px solid darken($brand-main-faded, 10%);
+					padding: 0.5rem;
+					border-radius: 5px;
+					transition: all 0.3s ease;
+					&:hover {
+						border: 3px solid $brand-main;
+					}
+				}
+			}
+			& .button_col {
+				align-self: flex-end;
+				& button {
+					background: $brand-main;
+					color: #fff;
+					width: 10rem;
+					height: 2.5rem;
+					border: 0;
+					border-radius: 5px;
+					box-shadow: 0 1px 5px $brand-main;
+					transition: all 0.3s ease;
+					&:hover {
+						cursor: pointer;
+						box-shadow: 0 0 0;
+					}
+				}
+			}
+		}
+	}
+}
