@@ -9,6 +9,7 @@ const { check, validationResult } = require('express-validator');
 
 //TODO setup password reset
 //TODO setup email reset
+//TODO create a route for email verification, send a code to user email and have user enter the code in the next step
 
 //@route POST route
 //@desc Create a user
@@ -16,7 +17,6 @@ const { check, validationResult } = require('express-validator');
 router.post(
 	'/',
 	[
-		check('name', 'Please enter your name').not().isEmpty(),
 		check('email', 'Please enter your email').not().isEmpty(),
 		check('email', 'Please enter a valid email').isEmail(),
 		check('password', 'Please enter a password').not().isEmpty(),
@@ -31,7 +31,7 @@ router.post(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const { name, email, password, passwordTwo, handle, adminCode } = req.body;
+		const { email, password, passwordTwo, handle, adminCode } = req.body;
 
 		const foundUser = await User.findOne({ email });
 
@@ -46,7 +46,6 @@ router.post(
 		try {
 			const newUser = new User({
 				email,
-				name,
 				handle,
 				userRole: 'User',
 			});
@@ -87,6 +86,7 @@ router.get('/', auth, async (req, res) => {
 		return res.status(400).json({ msg: 'Could not locate a user' });
 	}
 
+	console.log('We found the user', foundUser);
 	try {
 		res.json(foundUser);
 	} catch (error) {

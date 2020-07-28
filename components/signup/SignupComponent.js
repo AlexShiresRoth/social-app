@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import style from './LoginForm.module.scss';
-import { signIn } from '../actions/auth';
-import Router from 'next/router';
-import { withRouter } from 'next/dist/client/router';
+import style from './SignupComponent.module.scss';
+import { signup } from '../actions/auth';
 import { connect } from 'react-redux';
+import Router from 'next/router';
 
-const LoginForm = ({ signIn, history, auth: { isAuthenticated } }) => {
+const SignupComponent = ({ auth: { isAuthenticated }, signup }) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
+		passwordTwo: '',
+		handle: '',
 	});
 
-	const { email, password } = formData;
+	const { email, password, passwordTwo, handle } = formData;
 
 	const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
 	const formSubmit = (e) => {
 		e.preventDefault();
-		signIn(formData, history);
+		signup(formData);
 	};
 
-	useEffect(() => {
-		if (isAuthenticated) {
-			Router.push('/Dashboard');
-		}
-	}, [isAuthenticated]);
+	if (isAuthenticated) {
+		Router.push('Dashboard');
+	}
+
 	return (
 		<section className={style.section}>
 			<form className={style.form} onSubmit={(e) => formSubmit(e)}>
 				<div className={style.inner}>
 					<div className={style.header}>
-						<h3>Login to your account</h3>
+						<h3>Create an account</h3>
 						<div className={style.logo_container}>
 							<img
 								src={`https://res.cloudinary.com/snackmanproductions/image/upload/v1595728394/social-app/syndicate-logo_qfxpd8.png`}
@@ -40,7 +40,7 @@ const LoginForm = ({ signIn, history, auth: { isAuthenticated } }) => {
 					</div>
 
 					<div className={style.input_col}>
-						<label>Email</label>
+						<label>Add Your Email</label>
 						<input
 							type="email"
 							name="email"
@@ -51,13 +51,35 @@ const LoginForm = ({ signIn, history, auth: { isAuthenticated } }) => {
 						/>
 					</div>
 					<div className={style.input_col}>
-						<label>Password</label>
+						<label>Create Password</label>
 						<input
 							type="password"
 							name="password"
 							value={password}
 							onChange={(e) => onChange(e)}
 							placeholder="Please enter your password"
+							required={true}
+						/>
+					</div>
+					<div className={style.input_col}>
+						<label>Confirm Password</label>
+						<input
+							type="password"
+							name="passwordTwo"
+							value={passwordTwo}
+							onChange={(e) => onChange(e)}
+							placeholder="Please confirm your password"
+							required={true}
+						/>
+					</div>
+					<div className={style.input_col}>
+						<label>Create a user alias</label>
+						<input
+							type="text"
+							name="handle"
+							value={handle}
+							onChange={(e) => onChange(e)}
+							placeholder="Please create a user alias"
 							required={true}
 						/>
 					</div>
@@ -72,8 +94,8 @@ const LoginForm = ({ signIn, history, auth: { isAuthenticated } }) => {
 	);
 };
 
-LoginForm.propTypes = {
-	signIn: PropTypes.func,
+SignupComponent.propTypes = {
+	signup: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -82,4 +104,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { signIn })(withRouter(LoginForm));
+export default connect(mapStateToProps, { signup })(SignupComponent);
