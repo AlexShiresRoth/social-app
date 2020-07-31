@@ -1,0 +1,24 @@
+@import '../../sass/variables';
+
+.alert_container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem 0;
+	& .inner {
+		max-width: 90%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		& p {
+			color: #fff;
+		}
+	}
+}
+.warning {
+	background: $brand-contrast-faded;
+}
+.success {
+	background: $brand-accent;
+}

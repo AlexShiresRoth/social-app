@@ -23,7 +23,7 @@ const SignupComponent = ({ auth: { isAuthenticated }, signup }) => {
 	};
 
 	if (isAuthenticated) {
-		Router.push('Dashboard');
+		Router.push('/Dashboard');
 	}
 
 	return (

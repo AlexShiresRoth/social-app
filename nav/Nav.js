@@ -25,6 +25,9 @@ const Nav = ({ auth: { isAuthenticated, loading }, logout }) => {
 			<Link href="/" as={`/`}>
 				<a>Home</a>
 			</Link>
+			<Link href="/Dashboard">
+				<a>Dashboard</a>
+			</Link>
 			<Link href="/feed" as={`/main`}>
 				<a>Feed</a>
 			</Link>

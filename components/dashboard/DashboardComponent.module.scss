@@ -1,0 +1,59 @@
+@import '../../sass/variables';
+
+.db_container {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: $brand-main-faded;
+	& .db_grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		gap: 2rem;
+		justify-items: center;
+		& .db_col {
+			min-width: 25vw;
+			min-height: 30vh;
+			padding: 1rem;
+			background: #fff;
+			border-radius: 5px;
+			box-shadow: 0 1px 20px darken($brand-main-faded, 5%);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			& h2 {
+				font-size: 1.9vw;
+			}
+			& .color_one {
+				color: $brand-main;
+			}
+			& .color_two {
+				color: $brand-accent;
+			}
+			& .color_three {
+				color: $brand-contrast;
+			}
+			& button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: $brand-main;
+				border: 0;
+				border-radius: 5px;
+				color: #fff;
+				height: 3rem;
+				font-size: 1vw;
+				width: 6vw;
+				box-shadow: 0 1px 10px darken($brand-main, 5%);
+				transition: all 0.3s ease;
+				text-transform: uppercase;
+				&:hover {
+					cursor: pointer;
+					box-shadow: 0 1px 1px darken($brand-main, 5%);
+				}
+			}
+		}
+	}
+}

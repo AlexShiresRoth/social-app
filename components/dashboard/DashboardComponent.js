@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import { loadUser } from '../actions/auth';
+import style from './DashboardComponent.module.scss';
+import { dbConfigArray } from './dbConfig';
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
 const DashboardComponent = ({ auth: { isAuthenticated, user }, loadUser }) => {
 	useEffect(() => {
@@ -15,7 +18,28 @@ const DashboardComponent = ({ auth: { isAuthenticated, user }, loadUser }) => {
 		if (isAuthenticated) loadUser();
 	}, [isAuthenticated]);
 
-	return <section>DASHBOARD HOMIE</section>;
+	return (
+		<section className={style.db_container}>
+			<div className={style.db_grid}>
+				{dbConfigArray.map((gridItem, i) => {
+					return (
+						<div className={style.db_col} key={i}>
+							<h2
+								className={
+									i % 2 === 0 ? style.color_one : i % 3 === 0 ? style.color_three : style.color_two
+								}
+							>
+								{gridItem.title}
+							</h2>
+							<button>
+								{gridItem.btn} <AiOutlineArrowRight />
+							</button>
+						</div>
+					);
+				})}
+			</div>
+		</section>
+	);
 };
 
 DashboardComponent.propTypes = {
@@ -24,7 +48,6 @@ DashboardComponent.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return {
 		auth: state.auth,
 	};
