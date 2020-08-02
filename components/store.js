@@ -3,6 +3,7 @@ import { HYDRATE, createWrapper } from 'next-redux-wrapper';
 import thunkMiddleware from 'redux-thunk';
 import auth from './reducers/auth';
 import alert from './reducers/alert';
+import feed from './reducers/feed';
 
 const bindMiddleware = (middleware) => {
 	if (process.env.NODE_ENV !== 'production') {
@@ -15,6 +16,7 @@ const bindMiddleware = (middleware) => {
 const combinedReducer = combineReducers({
 	auth,
 	alert,
+	feed,
 });
 
 const reducer = (state, action) => {

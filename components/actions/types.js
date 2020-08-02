@@ -6,3 +6,5 @@ export const SIGNUP = 'SIGNUP';
 export const LOAD_USER = 'LOAD_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
+export const GET_FEED = 'GET_FEED';
+export const FEED_ERROR = 'FEED_ERROR';

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import { loadUser } from '../actions/auth';
 import style from './DashboardComponent.module.scss';
+import Link from 'next/link';
 import { dbConfigArray } from './dbConfig';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
@@ -31,9 +32,11 @@ const DashboardComponent = ({ auth: { isAuthenticated, user }, loadUser }) => {
 							>
 								{gridItem.title}
 							</h2>
-							<button>
-								{gridItem.btn} <AiOutlineArrowRight />
-							</button>
+							<Link href={gridItem.path} as={gridItem.title}>
+								<button>
+									{gridItem.btn} <AiOutlineArrowRight />
+								</button>
+							</Link>
 						</div>
 					);
 				})}
