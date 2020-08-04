@@ -3,12 +3,15 @@ const Post = require('../models/Post');
 const auth = require('../middleware/auth');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
+const User = require('../models/User');
 
 //@route POST route
 //@desc create post
 //@access private
 router.post('/', auth, [check('text', 'Please add some text to your post').not().isEmpty()], async (req, res) => {
 	const errors = validationResult(req);
+
+	const foundUser = await User.findById(req.user.id);
 
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
@@ -21,7 +24,8 @@ router.post('/', auth, [check('text', 'Please add some text to your post').not()
 	if (text) newPostFields.text = text;
 	if (status) newPostFields.status = status;
 	newPostFields.user = req.user.id;
-
+	newPostFields.author = foundUser.handle;
+	console.log(newPostFields.author);
 	try {
 		const createdPost = new Post(newPostFields);
 
@@ -59,7 +63,7 @@ router.get('/', auth, async (req, res) => {
 //TODO test this route
 router.put('/like/:id', auth, async (req, res) => {
 	const foundPost = await Post.findById(req.params.id);
-
+	const foundUser = await User.findById(req.user.id);
 	if (!foundPost) {
 		console.error(error);
 		return res.status(400).json({ msg: 'Could not locate post' });
@@ -75,7 +79,7 @@ router.put('/like/:id', auth, async (req, res) => {
 	}
 
 	try {
-		foundPost.likes.push(req.user.id);
+		foundPost.likes.push(foundUser);
 		await foundPost.save();
 		res.json(foundPost);
 	} catch (error) {
