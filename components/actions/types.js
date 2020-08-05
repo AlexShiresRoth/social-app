@@ -8,3 +8,6 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
 export const GET_FEED = 'GET_FEED';
 export const FEED_ERROR = 'FEED_ERROR';
+export const REMOVE_POST = 'REMOVE_POST';
+export const LIKE_POST = 'LIKE_POST';
+export const COMMENT_POST = 'COMMENT_POST';

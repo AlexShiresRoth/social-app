@@ -7,7 +7,93 @@
 	justify-content: center;
 	padding: 1rem;
 	box-shadow: 0 1px 10px $brand-main-faded;
+	min-width: 30vw;
+	border-radius: 3px;
 	& .container {
 		max-width: 90%;
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+		& .post_heading {
+			display: flex;
+			& p {
+				color: $brand-accent;
+				& span {
+					color: #999;
+				}
+			}
+		}
+		& .post_body {
+			border-bottom: 1px solid #eee;
+			margin-bottom: 1rem;
+			& p {
+				color: #999;
+				font-size: 1.5vw;
+			}
+		}
+		& .post_user {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			& .user_container {
+				display: flex;
+				align-items: center;
+				& a {
+					margin-left: 1rem;
+					color: $brand-accent;
+				}
+				& .img_container {
+					max-width: 3rem;
+					& img {
+						max-width: 100%;
+						border-radius: 50%;
+					}
+				}
+			}
+			& .actions {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+				& button {
+					background: transparent;
+					border: 0;
+					display: flex;
+					align-items: center;
+					transition: all 0.3s ease;
+					& svg {
+						font-size: 1.2rem;
+						padding: 1rem;
+						background: $brand-main-faded;
+						border-radius: 50%;
+						color: #999;
+						transition: all 0.3s ease;
+					}
+				}
+				& .trash:hover {
+					cursor: pointer;
+					& svg {
+						color: $brand-contrast;
+						background: #fff;
+						box-shadow: 0 1px 10px lighten($brand-accent, 10%);
+					}
+				}
+				& .comment:hover {
+					cursor: pointer;
+					& svg {
+						color: $brand-main;
+						background: #fff;
+						box-shadow: 0 1px 10px lighten($brand-accent, 10%);
+					}
+				}
+				& .like:hover {
+					cursor: pointer;
+					& svg {
+						color: $brand-accent;
+						background: #fff;
+						box-shadow: 0 1px 10px lighten($brand-accent, 10%);
+					}
+				}
+			}
+		}
 	}
 }

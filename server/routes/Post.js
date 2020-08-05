@@ -25,7 +25,7 @@ router.post('/', auth, [check('text', 'Please add some text to your post').not()
 	if (status) newPostFields.status = status;
 	newPostFields.user = req.user.id;
 	newPostFields.author = foundUser.handle;
-	console.log(newPostFields.author);
+	newPostFields.userAvatar = foundUser.avatar;
 	try {
 		const createdPost = new Post(newPostFields);
 
@@ -93,7 +93,7 @@ router.put('/like/:id', auth, async (req, res) => {
 //@access private
 router.delete('/remove/:id', auth, async (req, res) => {
 	const foundPost = await Post.findById(req.params.id);
-
+	console.log(foundPost);
 	if (!foundPost) {
 		return res.status(400).json({ msg: 'Could not locate post' });
 	}

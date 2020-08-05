@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { dbConfigArray } from './dbConfig';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
-const DashboardComponent = ({ auth: { isAuthenticated, user }, loadUser }) => {
+const DashboardComponent = ({ auth: { isAuthenticated }, loadUser }) => {
 	useEffect(() => {
 		if (!isAuthenticated) {
 			Router.push('/');

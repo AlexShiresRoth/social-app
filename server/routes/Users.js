@@ -5,6 +5,7 @@ const User = require('../models/User');
 const auth = require('../middleware/auth');
 const config = require('config');
 const router = express.Router();
+const gravatar = require('gravatar');
 const { check, validationResult } = require('express-validator');
 
 //TODO setup password reset
@@ -44,9 +45,15 @@ router.post(
 		}
 
 		try {
+			const avatar = gravatar.url(email, {
+				s: '200',
+				r: 'pg',
+				d: 'mm',
+			});
 			const newUser = new User({
 				email,
 				handle,
+				avatar,
 				userRole: 'User',
 			});
 
@@ -75,6 +82,40 @@ router.post(
 		}
 	}
 );
+
+//@route POST ROute
+//@desc edit user
+//@access private
+router.post('/edit', auth, async (req, res) => {
+	const foundUser = await User.findById(req.user.id);
+
+	const { handle, email, avatar } = req.body;
+
+	if (!foundUser) {
+		return res.status(400).json({ msg: 'Could not locate user' });
+	}
+	if (!avatar) {
+		const newAvatar = gravatar.url(email, {
+			s: '200',
+			r: 'pg',
+			d: 'mm',
+		});
+		foundUser.avatar = newAvatar;
+		await foundUser.save();
+	}
+	if (handle) foundUser.handle = handle;
+	if (email) foundUser.email = email;
+	if (avatar) foundUser.avatar = avatar;
+
+	try {
+		console.log(foundUser);
+		await foundUser.save();
+		return res.json(foundUser);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({ msg: 'Internal Server Error' });
+	}
+});
 
 //@route GET ROUTE
 //@desc get user

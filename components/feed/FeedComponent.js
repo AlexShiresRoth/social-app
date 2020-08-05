@@ -23,7 +23,9 @@ const FeedComponent = ({ getNewsFeed, feed: { loading, newsFeed } }) => {
 	);
 };
 
-FeedComponent.propTypes = {};
+FeedComponent.propTypes = {
+	getNewsFeed: PropTypes.func,
+};
 
 const mapStateToProps = (state) => ({
 	feed: state.feed,

@@ -2,12 +2,14 @@
 
 .section {
 	width: 100%;
-	min-height: 100vh;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	background: $brand-main-faded;
+	padding: 2rem 0;
 	& .container {
-		max-width: 90%;
+		margin-top: 10vh;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2vh 0;
 	}
 }
