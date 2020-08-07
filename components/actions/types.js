@@ -11,3 +11,4 @@ export const FEED_ERROR = 'FEED_ERROR';
 export const REMOVE_POST = 'REMOVE_POST';
 export const LIKE_POST = 'LIKE_POST';
 export const COMMENT_POST = 'COMMENT_POST';
+export const CREATE_POST = 'CREATE_POST';

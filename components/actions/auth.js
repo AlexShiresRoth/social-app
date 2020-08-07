@@ -6,7 +6,7 @@ import Router from 'next/router';
 
 export const loadUser = () => async (dispatch) => {
 	const token = localStorage.getItem('token');
-	console.log(token);
+	console.log('this thing loading');
 	if (token) {
 		setAuthToken(token);
 	}
@@ -35,6 +35,8 @@ export const signIn = (formData) => async (dispatch) => {
 			payload: res.data,
 		});
 
+		dispatch(loadUser());
+
 		Router.push('/Dashboard');
 
 		dispatch(setAlert('Welcome back to Syndicate', 'success'));
@@ -45,7 +47,7 @@ export const signIn = (formData) => async (dispatch) => {
 				type: AUTH_ERROR,
 				payload: errors.forEach((err) => err.msg),
 			});
-			dispatch(errors.forEach((err) => setAlert(err.msg, 'danger')));
+			errors.forEach((err) => dispatchsetAlert(err.msg, 'danger'));
 		}
 		dispatch({
 			type: AUTH_ERROR,
@@ -72,7 +74,7 @@ export const signup = (formData) => async (dispatch) => {
 				type: AUTH_ERROR,
 				payload: errors.forEach((err) => err.msg),
 			});
-			dispatch(errors.forEach((err) => setAlert(err.msg, 'danger')));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({
 			type: AUTH_ERROR,

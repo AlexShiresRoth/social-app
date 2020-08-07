@@ -1,4 +1,4 @@
-import { GET_FEED, FEED_ERROR, REMOVE_POST } from '../actions/types';
+import { GET_FEED, FEED_ERROR, REMOVE_POST, CREATE_POST } from '../actions/types';
 
 const initialState = {
 	newsFeed: [],
@@ -15,6 +15,12 @@ export default (state = initialState, action) => {
 				newsFeed: payload,
 				loading: false,
 			};
+		case CREATE_POST:
+			return {
+				...state,
+				newsFeed: [payload, ...state.newsFeed],
+				loading: false,
+			};
 		case REMOVE_POST:
 			return {
 				...state,
@@ -24,7 +30,6 @@ export default (state = initialState, action) => {
 		case FEED_ERROR:
 			return {
 				...state,
-				newsFeed: [],
 				errors: payload,
 				loading: false,
 			};

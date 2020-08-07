@@ -7,9 +7,19 @@
 	background: $brand-main-faded;
 	padding: 2rem 0;
 	& .container {
-		margin-top: 10vh;
+		margin-top: 0vh;
 		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2vh 0;
+		grid-template-columns: repeat(3, auto);
+		gap: 2vh 1vw;
+		width: 90%;
+		& .post_create {
+			display: flex;
+			flex-direction: column;
+		}
+		& .feed {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 1vh 0;
+		}
 	}
 }
