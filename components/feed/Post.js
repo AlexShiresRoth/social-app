@@ -2,30 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Post.module.scss';
 import { connect } from 'react-redux';
-import { removePost } from '../actions/feed';
+import { removePost, likePost } from '../actions/feed';
 import { BsTrash } from 'react-icons/bs';
 import { FaRegComments, FaHandHoldingHeart } from 'react-icons/fa';
 import Router from 'next/router';
 //TODO allow user to add background img to post
 
-const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost }) => {
-	console.log(post, user);
-
+const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost, likePost, feed }) => {
+	if (!isAuthenticated) {
+		Router.push('/');
+	}
 	const handlePostRemoval = (e) => {
 		e.preventDefault();
 		if (isAuthenticated) removePost(post._id);
 	};
 
-	const authroizedActions = (
+	const authorizedActions = (
 		<div className={style.actions}>
-			<button onClick={(e) => handlePostRemoval(e)}  className={style.trash}>
+			<button onClick={(e) => handlePostRemoval(e)} className={style.trash}>
 				<BsTrash />
 			</button>
 			<button className={style.comment}>
 				<FaRegComments />
 			</button>
-			<button className={style.like}>
-				<FaHandHoldingHeart />
+			<button
+				className={
+					style.like + ` ${post.likes.filter((post) => post._id === user._id).length > 0 ? style.liked : ''}`
+				}
+				onClick={(e) => likePost(post._id)}
+			>
+				<FaHandHoldingHeart /> {post.likes.length}
 			</button>
 		</div>
 	);
@@ -39,10 +45,6 @@ const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost }) =>
 			</button>
 		</div>
 	);
-
-	if (!isAuthenticated) {
-		Router.push('/');
-	}
 
 	return !loading ? (
 		<div className={style.post}>
@@ -63,7 +65,7 @@ const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost }) =>
 						<a>{post.author}</a>
 					</div>
 
-					{user._id === post.user ? authroizedActions : unAuthorizedActions}
+					{user._id === post.user ? authorizedActions : unAuthorizedActions}
 				</div>
 			</div>
 		</div>
@@ -76,6 +78,7 @@ Post.propTypes = {
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
+	feed: state.feed,
 });
 
-export default connect(mapStateToProps, { removePost })(Post);
+export default connect(mapStateToProps, { removePost, likePost })(Post);

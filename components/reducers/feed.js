@@ -1,7 +1,8 @@
-import { GET_FEED, FEED_ERROR, REMOVE_POST, CREATE_POST } from '../actions/types';
+import { GET_FEED, FEED_ERROR, REMOVE_POST, CREATE_POST, LIKE_POST } from '../actions/types';
 
 const initialState = {
 	newsFeed: [],
+	post: null,
 	loading: true,
 	errors: null,
 };
@@ -19,6 +20,15 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				newsFeed: [payload, ...state.newsFeed],
+				loading: false,
+			};
+		case LIKE_POST:
+			return {
+				...state,
+				newsFeed: state.newsFeed.map((post) =>
+					post._id === payload.id ? { ...post, likes: payload.likes } : post
+				),
+				post: { ...state.post, likes: payload.likes },
 				loading: false,
 			};
 		case REMOVE_POST:

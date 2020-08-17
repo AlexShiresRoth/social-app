@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { logout } from '../components/actions/auth';
 
 const Nav = ({ auth: { isAuthenticated, loading }, logout }) => {
-	console.log(isAuthenticated);
 	const unAuthorizedLinks = (
 		<div className={style.nav_right}>
 			<Link href="/" as={`/`}>
@@ -30,9 +29,6 @@ const Nav = ({ auth: { isAuthenticated, loading }, logout }) => {
 			</Link>
 			<Link href="/FeedPage" as={`/main`}>
 				<a>Feed</a>
-			</Link>
-			<Link href="/newpost" as={`/createpost`}>
-				<a>+Post</a>
 			</Link>
 
 			<a onClick={(e) => logout()}>Logout</a>

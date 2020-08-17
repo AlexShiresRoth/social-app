@@ -49,7 +49,7 @@ router.get('/', auth, async (req, res) => {
 	}
 
 	try {
-		res.json(foundPosts);
+		res.json(foundPosts.reverse());
 	} catch (error) {
 		console.error(error);
 		res.status(500).json({ msg: 'Internal Server Error' });
@@ -75,13 +75,14 @@ router.put('/like/:id', auth, async (req, res) => {
 		const removedLikes = foundPost.likes.filter((like) => like._id.toString() !== req.user.id);
 		foundPost.likes = removedLikes;
 		await foundPost.save();
-		return res.json(foundPost);
+		return res.json(foundPost.likes);
 	}
 
 	try {
 		foundPost.likes.push(foundUser);
 		await foundPost.save();
-		res.json(foundPost);
+		console.log(foundPost.likes);
+		res.json(foundPost.likes);
 	} catch (error) {
 		console.error(error);
 		return res.status(500).json({ msg: 'Internal Server Errror' });

@@ -1,5 +1,5 @@
 import api from '../../utils/api';
-import { GET_FEED, FEED_ERROR, REMOVE_POST, CREATE_POST } from './types';
+import { GET_FEED, FEED_ERROR, REMOVE_POST, CREATE_POST, LIKE_POST } from './types';
 import { setAlert } from './alert';
 export const getNewsFeed = () => async (dispatch) => {
 	try {
@@ -36,6 +36,23 @@ export const createPost = (postData) => async (dispatch) => {
 			});
 			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
+		dispatch({
+			type: FEED_ERROR,
+			payload: error.response.data.msg,
+		});
+		dispatch(setAlert(error.response.data.msg, 'danger'));
+	}
+};
+
+export const likePost = (id) => async (dispatch) => {
+	try {
+		console.log(id);
+		const res = await api.put(`/post/like/${id}`);
+		dispatch({
+			type: LIKE_POST,
+			payload: { id, likes: res.data },
+		});
+	} catch (error) {
 		dispatch({
 			type: FEED_ERROR,
 			payload: error.response.data.msg,

@@ -60,6 +60,10 @@
 					display: flex;
 					align-items: center;
 					transition: all 0.3s ease;
+					&:active,
+					&:focus {
+						outline: 1px solid transparent;
+					}
 					& svg {
 						font-size: 1.2rem;
 						padding: 1rem;
@@ -74,7 +78,7 @@
 					& svg {
 						color: $brand-contrast;
 						background: #fff;
-						box-shadow: 0 1px 10px lighten($brand-accent, 10%);
+						box-shadow: 0 1px 10px lighten($brand-contrast, 10%);
 					}
 				}
 				& .comment:hover {
@@ -87,6 +91,13 @@
 				}
 				& .like:hover {
 					cursor: pointer;
+					& svg {
+						color: $brand-accent;
+						background: #fff;
+						box-shadow: 0 1px 10px lighten($brand-accent, 10%);
+					}
+				}
+				& .liked {
 					& svg {
 						color: $brand-accent;
 						background: #fff;
