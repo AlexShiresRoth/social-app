@@ -89,6 +89,25 @@ router.put('/like/:id', auth, async (req, res) => {
 	}
 });
 
+//@route GET Route
+//@desc get user post
+//@access private
+router.get('/getpost/:id', auth, async (req, res) => {
+	const foundPost = await Post.findById(req.params.id);
+
+	if (!foundPost) {
+		return res.status(400).json({ msg: 'Could not locate post' });
+	}
+
+	try {
+		console.log(foundPost);
+		res.json(foundPost);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ msg: 'Internal Server Error' });
+	}
+});
+
 //@route DELETE Route
 //@desc Remove Post
 //@access private

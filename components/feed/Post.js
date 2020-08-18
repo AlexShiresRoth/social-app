@@ -6,6 +6,7 @@ import { removePost, likePost } from '../actions/feed';
 import { BsTrash } from 'react-icons/bs';
 import { FaRegComments, FaHandHoldingHeart } from 'react-icons/fa';
 import Router from 'next/router';
+import Link from 'next/link';
 //TODO allow user to add background img to post
 
 const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost, likePost, feed }) => {
@@ -22,9 +23,13 @@ const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost, like
 			<button onClick={(e) => handlePostRemoval(e)} className={style.trash}>
 				<BsTrash />
 			</button>
-			<button className={style.comment}>
-				<FaRegComments />
-			</button>
+			<Link href={`/post/[${post._id}]/[UserPost]`} as={`/post/${post._id}/UserPost`}>
+				<a>
+					<button className={style.comment}>
+						<FaRegComments />
+					</button>
+				</a>
+			</Link>
 			<button
 				className={
 					style.like + ` ${post.likes.filter((post) => post._id === user._id).length > 0 ? style.liked : ''}`
