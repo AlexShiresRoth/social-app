@@ -7,7 +7,7 @@
 	justify-content: center;
 	padding: 1rem;
 	box-shadow: 0 1px 10px $brand-main-faded;
-	min-width: 30vw;
+	min-width: 20vw;
 	border-radius: 3px;
 	& .container {
 		max-width: 90%;
@@ -43,7 +43,7 @@
 					color: $brand-accent;
 				}
 				& .img_container {
-					max-width: 3rem;
+					max-width: 2.5rem;
 					& img {
 						max-width: 100%;
 						border-radius: 50%;
@@ -65,8 +65,8 @@
 						outline: 1px solid transparent;
 					}
 					& svg {
-						font-size: 1.2rem;
-						padding: 1rem;
+						font-size: 1rem;
+						padding: 0.7rem;
 						background: $brand-main-faded;
 						border-radius: 50%;
 						color: #999;

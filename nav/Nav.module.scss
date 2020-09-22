@@ -5,7 +5,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 5rem;
-	box-shadow: 0 1px 5px darken(#eee, 10%);
+	border: 1px solid #eee;
 
 	& .inner {
 		width: 90%;

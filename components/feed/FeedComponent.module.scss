@@ -5,13 +5,13 @@
 	display: flex;
 	justify-content: center;
 	background: $brand-main-faded;
-	padding: 2rem 0;
+	padding: 1rem 0;
 	& .container {
 		margin-top: 0vh;
 		display: grid;
 		grid-template-columns: repeat(3, auto);
 		gap: 2vh 1vw;
-		width: 90%;
+		width: 100%;
 		& .post_create {
 			display: flex;
 			flex-direction: column;

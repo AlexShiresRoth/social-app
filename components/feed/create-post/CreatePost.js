@@ -5,7 +5,7 @@ import { createPost } from '../../actions/feed';
 import { connect } from 'react-redux';
 import { BsImage } from 'react-icons/bs';
 import { MdAdd } from 'react-icons/md';
-import { AiOutlineMinus } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 const CreatePost = ({ createPost }) => {
 	const [postData, setData] = useState({
 		text: '',
@@ -20,21 +20,37 @@ const CreatePost = ({ createPost }) => {
 		setLength(text.length);
 	};
 
+	const [formShowing, toggleForm] = useState(false);
+
 	const submitPost = (e) => {
 		e.preventDefault();
 		if (charLength <= 300 && charLength > 0) {
 			createPost(postData);
 			setTimeout(() => {
-				setData((prevState) => ({ text: '' }));
+				setData(() => ({ text: '' }));
 				setLength(0);
 			}, 100);
 		}
 	};
 
-	return (
+	return !formShowing ? (
+		<div className={style.form}>
+			<div className={style.inner}>
+				<p>Feel like writing something?</p>
+				<button onClick={(e) => toggleForm(!formShowing)} className={style.toggle_open}>
+					New Post <AiOutlinePlus />
+				</button>
+			</div>
+		</div>
+	) : (
 		<form className={style.form} onSubmit={(e) => submitPost(e)}>
 			<div className={style.inner}>
-				<p>Post what's on your mind...</p>
+				<div className={style.heading}>
+					<p>What's on your mind?</p>
+					<button onClick={() => toggleForm(!formShowing)} className={style.toggle_close}>
+						<AiOutlineClose />
+					</button>
+				</div>
 				<div className={style.input_container}>
 					<textarea
 						type="text"

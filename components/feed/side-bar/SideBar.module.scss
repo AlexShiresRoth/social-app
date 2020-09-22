@@ -1,0 +1,29 @@
+@import '../../../sass/variables';
+
+.side_bar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	background: #1b2cc115;
+	box-shadow: inset 0px 1px 10px #1b2cc11c;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	& .inner {
+		width: 95%;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0.5rem;
+		margin-top: 0.5rem;
+		& .tab {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			padding: 1rem 0;
+			background: rgba(255, 255, 255, 0.788);
+			border-radius: 3px;
+		}
+	}
+}

@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { getNewsFeed } from '../actions/feed';
 import Post from './Post';
 import CreatePost from './create-post/CreatePost';
+import SideBar from './side-bar/SideBar';
 
+//TODO lazy load infinite posting
 const FeedComponent = ({ getNewsFeed, feed: { loading, newsFeed } }) => {
 	useEffect(() => {
 		getNewsFeed();
@@ -14,10 +16,11 @@ const FeedComponent = ({ getNewsFeed, feed: { loading, newsFeed } }) => {
 	return !loading ? (
 		<section className={style.section}>
 			<div className={style.container}>
-				<div className={style.post_create}>
-					<CreatePost />
-				</div>
+				<SideBar />
 				<div className={style.feed}>
+					<div className={style.post_create}>
+						<CreatePost />
+					</div>
 					{newsFeed.map((post, i) => {
 						return <Post post={post} key={i} />;
 					})}
