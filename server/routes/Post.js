@@ -126,4 +126,40 @@ router.delete('/remove/:id', auth, async (req, res) => {
 	}
 });
 
+//@route POST route
+//@desc add comment to post
+//@access private
+router.post('/comment/:id', auth, [check('text', 'Please add your comment').not().isEmpty()], async (req, res) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() });
+	}
+
+	const { text } = req.body;
+	const foundPost = await Post.findById(req.params.id);
+	const foundUser = await User.findById(req.user.id);
+
+	if (!foundPost) {
+		return res.status(400).json({ msg: 'Could not locate post' });
+	}
+
+	const commentBody = {
+		text,
+		user: req.user.id,
+		avatar: foundUser.avatar,
+		name: foundUser.handle,
+	};
+	console.log(commentBody);
+	try {
+		foundPost.comments.unshift(commentBody);
+		await foundPost.save();
+
+		console.log('This is some stuff:', req.user, text);
+		res.json(foundPost);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json({ msg: 'Internal Server Error' });
+	}
+});
 module.exports = router;
