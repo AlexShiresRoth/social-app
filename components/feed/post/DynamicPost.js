@@ -19,7 +19,6 @@ const DynamicPost = ({ feed: { post, loading }, auth: { user, isAuthenticated },
 	useEffect(() => {
 		if (id) getPost(id);
 	}, [id]);
-	console.log(post);
 
 	const handlePostRemoval = (e) => {
 		e.preventDefault();

@@ -6,12 +6,15 @@ import { connect } from 'react-redux';
 import { BsImage } from 'react-icons/bs';
 import { MdAdd } from 'react-icons/md';
 import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+
+//TODO work on tags configuration
 const CreatePost = ({ createPost }) => {
 	const [postData, setData] = useState({
 		text: '',
+		tags: '',
 	});
 	const [charLength, setLength] = useState(0);
-	const { text } = postData;
+	const { text, tags } = postData;
 
 	const onChange = (e) => setData({ ...postData, [e.target.name]: e.target.value });
 
@@ -27,7 +30,7 @@ const CreatePost = ({ createPost }) => {
 		if (charLength <= 300 && charLength > 0) {
 			createPost(postData);
 			setTimeout(() => {
-				setData(() => ({ text: '' }));
+				setData(() => ({ text: '', tags: '' }));
 				setLength(0);
 			}, 100);
 		}
@@ -63,6 +66,12 @@ const CreatePost = ({ createPost }) => {
 						placeholder="Create your post"
 						required={true}
 					></textarea>
+				</div>
+				<div className={style.input_container}>
+					<label>
+						Tags: <span>Add an "&" to the beginning of each word and separate each by a space</span>
+					</label>
+					<input type="text" name="tags" value={tags} onChange={(e) => onChange(e)}></input>
 				</div>
 				<div className={style.actions}>
 					<span className={charLength <= 0 || charLength >= 300 ? style.danger_length : style.good_length}>

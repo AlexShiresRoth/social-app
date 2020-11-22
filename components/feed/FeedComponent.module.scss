@@ -6,10 +6,12 @@
 	justify-content: center;
 	background: $brand-main-faded;
 	padding: 1rem 0;
+	min-height: 60vh;
 	& .container {
 		margin-top: 0vh;
 		display: grid;
 		grid-template-columns: repeat(3, auto);
+		align-items: flex-start;
 		gap: 2vh 1vw;
 		width: 100%;
 		& .post_create {

@@ -17,12 +17,29 @@ router.post('/', auth, [check('text', 'Please add some text to your post').not()
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	const { text, status } = req.body;
+	const { text, status, tags } = req.body;
 
 	const newPostFields = {};
 
 	if (text) newPostFields.text = text;
 	if (status) newPostFields.status = status;
+	if (tags) {
+		//TODO finish adding tags
+		const newTags = tags.split(' ');
+		const regex = new RegExp('^[&]', 'i');
+
+		const filterTags = newTags
+			.filter((tag) => {
+				return tag.match(regex);
+			})
+			.map((filteredTag) => {
+				return { tagName: filteredTag };
+			});
+
+		console.log('THESE ARE THE TAGS', filterTags, tags);
+
+		newPostFields.tags = filterTags;
+	}
 	newPostFields.user = req.user.id;
 	newPostFields.author = foundUser.handle;
 	newPostFields.userAvatar = foundUser.avatar;

@@ -17,6 +17,7 @@ const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost, like
 		e.preventDefault();
 		if (isAuthenticated) removePost(post._id);
 	};
+	console.log(post);
 
 	const authorizedActions = (
 		<div className={style.actions}>
@@ -61,6 +62,17 @@ const Post = ({ post, auth: { user, loading, isAuthenticated }, removePost, like
 				</div>
 				<div className={style.post_body}>
 					<p>{post.text}</p>
+				</div>
+				<div className={style.post_tags}>
+					{post.tags && post.tags.length > 0
+						? post.tags.map((tag, i) => {
+								return (
+									<div className={style.tag_box}>
+										<a href="/#">{tag.tagName}</a>
+									</div>
+								);
+						  })
+						: null}
 				</div>
 				<div className={style.post_user}>
 					<div className={style.user_container}>

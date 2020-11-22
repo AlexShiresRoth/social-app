@@ -31,6 +31,20 @@
 				font-size: 1vw;
 			}
 		}
+		& .post_tags {
+			display: flex;
+			padding: 0.5rem;
+			background: $brand-main-faded;
+			border-radius: 3px;
+			margin-bottom: 1rem;
+			& .tag_box {
+				margin: 0 0.2rem;
+				& a {
+					color: $brand-accent;
+					text-decoration: none;
+				}
+			}
+		}
 		& .post_user {
 			display: flex;
 			justify-content: space-between;
