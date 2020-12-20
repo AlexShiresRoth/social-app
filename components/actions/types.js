@@ -14,3 +14,5 @@ export const COMMENT_POST = 'COMMENT_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const GET_POST = 'GET_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const GET_PROFILE = 'GET_PROFILE';
+export const PROFILE_ERROR = 'PROFILE_ERROR';

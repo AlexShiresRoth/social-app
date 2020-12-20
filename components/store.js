@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import auth from './reducers/auth';
 import alert from './reducers/alert';
 import feed from './reducers/feed';
+import profile from './reducers/profile';
 
 let store;
 
@@ -20,6 +21,7 @@ const combinedReducer = combineReducers({
 	auth,
 	alert,
 	feed,
+	profile,
 });
 
 const reducer = (state, action) => {

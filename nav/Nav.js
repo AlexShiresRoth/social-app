@@ -11,7 +11,7 @@ const Nav = ({ auth: { isAuthenticated, loading }, logout }) => {
 			<Link href="/" as={`/`}>
 				<a>Home</a>
 			</Link>
-			<Link href="/login" as={`/login`}>
+			<Link href="/login">
 				<a>Login</a>
 			</Link>
 			<Link href="/signup">
@@ -24,10 +24,10 @@ const Nav = ({ auth: { isAuthenticated, loading }, logout }) => {
 			<Link href="/" as={`/`}>
 				<a>Home</a>
 			</Link>
-			<Link href="/Dashboard">
+			<Link href="/dashboard">
 				<a>Dashboard</a>
 			</Link>
-			<Link href="/FeedPage" as={`/main`}>
+			<Link href="/feedpage" as={`/feed`}>
 				<a>Feed</a>
 			</Link>
 

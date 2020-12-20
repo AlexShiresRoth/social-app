@@ -1,6 +1,6 @@
 export const dbConfigArray = [
-	{ title: 'NewsFeed', btn: 'Go', path: '/FeedPage' },
-	{ title: 'UserProfile', btn: 'Go', path: '/' },
+	{ title: 'NewsFeed', btn: 'Go', path: '/feedpage' },
+	{ title: 'Profile', btn: 'Go', path: '/profilepage' },
 	{ title: 'CreatePost', btn: 'GO', path: '/' },
 	{ title: 'Friends', btn: 'Go', path: '/' },
 	{ title: 'Discover', btn: 'Go', path: '/' },
