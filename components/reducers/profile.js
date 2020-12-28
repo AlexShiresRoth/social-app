@@ -1,4 +1,4 @@
-const { GET_PROFILE, PROFILE_ERROR } = require('../actions/types');
+const { GET_PROFILE, PROFILE_ERROR, UPLOAD_AVATAR } = require('../actions/types');
 
 const initialState = {
 	myProfile: null,
@@ -11,6 +11,12 @@ export default (state = initialState, action) => {
 
 	switch (type) {
 		case GET_PROFILE:
+			return {
+				...state,
+				myProfile: payload,
+				loading: false,
+			};
+		case UPLOAD_AVATAR:
 			return {
 				...state,
 				myProfile: payload,

@@ -37,18 +37,23 @@
 					& p {
 						color: #666;
 					}
-					& .missing_img {
+					& .img_container {
 						width: 100%;
 						background: #eee;
 						border-radius: 5px;
 						padding: 5rem 0;
 						display: flex;
+						flex-direction: column;
 						align-items: center;
 						justify-content: center;
 						& svg {
 							width: 5rem;
 							size: 3rem;
 							color: #999;
+						}
+						&:hover {
+							cursor: grabbing;
+							animation: animateborder 3s linear infinite;
 						}
 					}
 					& .buttons {
@@ -102,5 +107,24 @@
 				}
 			}
 		}
+	}
+}
+
+@keyframes animateborder {
+	0% {
+		border: 4px solid transparent;
+		border-top: 4px solid $brand-accent;
+	}
+	25% {
+		border-right: 4px solid $brand-main;
+	}
+	50% {
+		border-bottom: 4px solid $brand-success;
+	}
+	75% {
+		border-left: 4px solid $brand-success;
+	}
+	100% {
+		border: 4px solid transparent;
 	}
 }

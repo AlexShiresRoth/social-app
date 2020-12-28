@@ -6,6 +6,7 @@ import MyProfile from './MyProfile';
 import ProfileCreation from './ProfileCreation';
 import LoadingSpinner from '../loadingspinner/LoadingSpinner';
 import style from './Profile.module.scss';
+import ProfileSvg from './svgs/ProfileSvg';
 
 const Profile = ({ getMyProfile, profile: { myProfile, loading } }) => {
 	const [profileFormVisible, toggleProfileForm] = useState(false);
@@ -17,19 +18,29 @@ const Profile = ({ getMyProfile, profile: { myProfile, loading } }) => {
 	return (
 		<section className={style.profile_db}>
 			<div className={style.inner}>
-				{loading ? (
+				{loading && myProfile === null ? (
 					<LoadingSpinner />
 				) : myProfile !== null ? (
 					<MyProfile />
 				) : (
 					<>
 						<div className={style.onboarding_container}>
-							<h2>Looks like you need a profile!</h2>
-							<button onPointerDown={(e) => toggleProfileForm(!profileFormVisible)}>
-								Click Here to Get Started
-							</button>
+							<div className={style.svg_component}>
+								<ProfileSvg />
+							</div>
+							<div className={style.start}>
+								<h2>Looks like you need a profile!</h2>
+								<button onPointerDown={(e) => toggleProfileForm(!profileFormVisible)}>
+									Click Here to Get Started
+								</button>
+							</div>
 						</div>
-						{profileFormVisible ? <ProfileCreation /> : null}
+						{profileFormVisible ? (
+							<ProfileCreation
+								profileFormVisible={profileFormVisible}
+								toggleProfileForm={toggleProfileForm}
+							/>
+						) : null}
 					</>
 				)}
 			</div>
