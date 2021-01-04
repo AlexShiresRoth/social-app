@@ -10,6 +10,9 @@ const ProfileSchema = new Schema({
 	avatar: {
 		type: String,
 	},
+	email: {
+		type: String,
+	},
 	handle: {
 		type: String,
 	},

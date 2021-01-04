@@ -3,16 +3,10 @@ import PropTypes from 'prop-types';
 import { Image } from 'react-feather';
 import { IKImage, IKContext, IKUpload } from 'imagekitio-react';
 import { uploadAvatarToStorage } from '../../actions/profile';
-import api from '../../../utils/api';
 import { connect } from 'react-redux';
+import style from './AvatarImport.module.scss';
 
-const AvatarImport = ({
-	style,
-	changeIndex,
-	key,
-	uploadAvatarToStorage,
-	profile: { myProfile, profileErrors, loading },
-}) => {
+const AvatarImport = ({ changeIndex, key, uploadAvatarToStorage, profile: { myProfile, profileErrors, loading } }) => {
 	const [file, setFile] = useState('');
 	const [path, setPath] = useState('');
 	const onError = (err) => {
@@ -36,9 +30,10 @@ const AvatarImport = ({
 		}
 	};
 
-	console.log('this is my profile!', myProfile);
 	return (
 		<div className={style.slide} key={key}>
+			<p>There are a bunch of things you can add to your profile. None of which are required!</p>
+
 			<div className={style.img_container}>
 				<IKContext
 					publicKey="public_c0Z4K/SNaaQr0tG+vETQrlRzdPc="
@@ -62,8 +57,7 @@ const AvatarImport = ({
 					<IKUpload fileName={file} onError={onError} onSuccess={onSuccess} />
 				</IKContext>
 			</div>
-			<p>There are a bunch of things you can add to your profile. None of which are required!</p>
-			<h3>1. Add an avatar</h3>
+
 			<div className={style.buttons}>
 				<button className={style.save_btn} onPointerDown={(e) => handleAvatarSave(e)}>
 					Save

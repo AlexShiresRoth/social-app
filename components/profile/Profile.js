@@ -8,7 +8,7 @@ import LoadingSpinner from '../loadingspinner/LoadingSpinner';
 import style from './Profile.module.scss';
 import ProfileSvg from './svgs/ProfileSvg';
 
-const Profile = ({ getMyProfile, profile: { myProfile, loading } }) => {
+const Profile = ({ getMyProfile, profile: { myProfile, loading, loadProfile } }) => {
 	const [profileFormVisible, toggleProfileForm] = useState(false);
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ const Profile = ({ getMyProfile, profile: { myProfile, loading } }) => {
 	return (
 		<section className={style.profile_db}>
 			<div className={style.inner}>
-				{loading && myProfile === null ? (
+				{loading || (loadProfile && myProfile === null) ? (
 					<LoadingSpinner />
 				) : myProfile !== null ? (
 					<MyProfile />

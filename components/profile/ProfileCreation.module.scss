@@ -16,115 +16,81 @@
 		padding: 1rem;
 		display: flex;
 		justify-content: center;
-		width: 30rem;
+		min-width: 30rem;
 		&__inner {
 			width: 90%;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			overflow-x: auto;
 			padding: 1rem 0;
-			&__slides {
+			&__heading {
+				position: relative;
 				display: flex;
-				width: 100%;
-				& .slide {
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					align-items: center;
-					padding: 1rem;
+				flex-direction: column;
+				& .progress_bar {
 					width: 100%;
-					& p {
-						color: #666;
-					}
-					& .img_container {
-						width: 100%;
-						background: #eee;
-						border-radius: 5px;
-						padding: 5rem 0;
+					height: 2px;
+					background: #eee;
+					display: block;
+					position: relative;
+					& .text_array {
 						display: flex;
-						flex-direction: column;
+						width: 100%;
+						justify-content: space-between;
 						align-items: center;
-						justify-content: center;
+						& p {
+							color: #eee;
+							transition: all 0.3s ease;
+						}
+						& .active_index {
+							color: $brand-accent;
+						}
+					}
+					&__inner {
+						width: 1%;
+						height: 100%;
+						display: block;
+						position: absolute;
+						top: 0;
+						left: 0;
+						background: $brand-accent;
+					}
+				}
+				& .title_level {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					& h2 {
+						font-size: 2rem;
+						color: $brand-main;
+					}
+					& button {
+						display: flex;
+						align-items: center;
+						background: transparent;
+						border: 0;
+						font-size: 1.2rem;
+						transition: all 0.3s ease;
 						& svg {
-							width: 5rem;
-							size: 3rem;
-							color: #999;
+							color: $brand-contrast-faded;
+							transition: all 0.3s ease;
 						}
 						&:hover {
-							cursor: grabbing;
-							animation: animateborder 3s linear infinite;
+							cursor: pointer;
 						}
-					}
-					& .buttons {
-						width: 100%;
-						border-top: 1px solid #eee;
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
-						padding: 1rem 0;
-						& .save_btn {
-							padding: 0.5rem 2rem;
-							background: $brand-success;
-							border-radius: 5px;
-							border: 0;
-							box-shadow: 0 1px 4px #999;
-							color: #fff;
-							transition: all 0.3s ease;
-							&:hover {
-								cursor: pointer;
-								box-shadow: 0 0 0 0 transparent;
-							}
-						}
-						& .next_btn {
-							padding: 0.5rem 2rem;
-							background: $brand-main;
-							border-radius: 5px;
-							border: 0;
-							box-shadow: 0 1px 4px #112;
-							color: #fff;
-							transition: all 0.3s ease;
-							&:hover {
-								cursor: pointer;
-								box-shadow: 0 0 0 0 transparent;
-							}
-						}
-						& .skip_btn {
-							padding: 0.5rem 2rem;
-							background: $brand-accent;
-							border-radius: 5px;
-							border: 0;
-							box-shadow: 0 1px 4px #999;
-							color: #fff;
-							transition: all 0.3s ease;
-							&:hover {
-								cursor: pointer;
-								box-shadow: 0 0 0 0 transparent;
-								background: $brand-accent-faded;
-							}
+
+						&:hover svg {
+							color: $brand-contrast;
 						}
 					}
 				}
 			}
+			&__slides {
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				margin-top: 1rem;
+			}
 		}
-	}
-}
-
-@keyframes animateborder {
-	0% {
-		border: 4px solid transparent;
-		border-top: 4px solid $brand-accent;
-	}
-	25% {
-		border-right: 4px solid $brand-main;
-	}
-	50% {
-		border-bottom: 4px solid $brand-success;
-	}
-	75% {
-		border-left: 4px solid $brand-success;
-	}
-	100% {
-		border: 4px solid transparent;
 	}
 }

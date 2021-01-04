@@ -1,0 +1,63 @@
+@import '../../../sass/variables';
+
+.slide {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 0;
+	width: 100%;
+	& p {
+		color: #666;
+	}
+
+	& .buttons {
+		width: 100%;
+		border-top: 1px solid #eee;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem 0;
+		margin-top: 2rem;
+		& .save_btn {
+			padding: 0.7rem 2.5rem;
+			background: $brand-success;
+			border-radius: 5px;
+			border: 0;
+			box-shadow: 0 1px 4px #999;
+			color: #fff;
+			transition: all 0.3s ease;
+			&:hover {
+				cursor: pointer;
+				box-shadow: 0 0 0 0 transparent;
+			}
+		}
+		& .next_btn {
+			padding: 0.7rem 2.5rem;
+			background: $brand-main;
+			border-radius: 5px;
+			border: 0;
+			box-shadow: 0 1px 4px #112;
+			color: #fff;
+			transition: all 0.3s ease;
+			&:hover {
+				cursor: pointer;
+				box-shadow: 0 0 0 0 transparent;
+			}
+		}
+		& .skip_btn {
+			padding: 0.7rem 2.5rem;
+			background: $brand-accent;
+			border-radius: 5px;
+			border: 0;
+			box-shadow: 0 1px 4px #999;
+			color: #fff;
+			transition: all 0.3s ease;
+			&:hover {
+				cursor: pointer;
+				box-shadow: 0 0 0 0 transparent;
+				background: $brand-accent-faded;
+			}
+		}
+	}
+}

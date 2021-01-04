@@ -1,9 +1,12 @@
-const { GET_PROFILE, PROFILE_ERROR, UPLOAD_AVATAR } = require('../actions/types');
+const { GET_PROFILE, PROFILE_ERROR, UPLOAD_AVATAR, SEARCH_FRIENDS } = require('../actions/types');
 
 const initialState = {
 	myProfile: null,
 	profileErrors: null,
 	loading: true,
+	loadProfile: true,
+	matchingFriends: null,
+	loadFriends: true,
 };
 
 export default (state = initialState, action) => {
@@ -14,7 +17,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				myProfile: payload,
-				loading: false,
+				loadProfile: false,
 			};
 		case UPLOAD_AVATAR:
 			return {
@@ -22,13 +25,21 @@ export default (state = initialState, action) => {
 				myProfile: payload,
 				loading: false,
 			};
+		case SEARCH_FRIENDS:
+			return {
+				...state,
+				matchingFriends: payload,
+				loadingFriends: false,
+			};
 		case PROFILE_ERROR:
 			console.log('PROFILE ERROR');
 			return {
 				...state,
 				profileErrors: payload,
 				loading: false,
+				loadProfile: false,
 			};
+
 		default:
 			return state;
 	}

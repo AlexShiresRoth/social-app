@@ -3,6 +3,7 @@ const { validationResult, check } = require('express-validator');
 const auth = require('../middleware/auth');
 const Profile = require('../models/Profile');
 const ImageKit = require('imagekit');
+const User = require('../models/User');
 const router = express.Router();
 
 const imagekit = new ImageKit({
@@ -46,6 +47,7 @@ router.post('/uploadavatar', auth, [check('url', 'Please upload an avatar').not(
 	if (url) profileFields.avatar = url;
 
 	const foundProfile = await Profile.findById(req.user.id);
+	const foundUser = await User.findById(req.user.id);
 
 	if (foundProfile) {
 		foundProfile.avatar = url;
@@ -54,6 +56,8 @@ router.post('/uploadavatar', auth, [check('url', 'Please upload an avatar').not(
 	}
 	try {
 		profileFields.user = req.user.id;
+		profileFields.handle = foundUser.handle;
+		profileFields.email = foundUser.email;
 		const newProfile = new Profile(profileFields);
 
 		await newProfile.save();
