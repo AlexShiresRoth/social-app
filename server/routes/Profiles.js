@@ -31,22 +31,25 @@ router.get('/myprofile', auth, async (req, res) => {
 });
 
 //@route POST route
-//@desc upload avatar image to imagekit and save url in db
+//@desc create profile with whatever the user submitted
 //@access private
-router.post('/uploadavatar', auth, [check('url', 'Please upload an avatar').not().isEmpty()], async (req, res) => {
+router.post('/createprofile', auth, async (req, res) => {
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
 		return res.json({ errors: errors.array() });
 	}
 
-	const { url } = req.body;
+	const { url, requests, interests } = req.body;
 
 	const profileFields = {};
 
 	if (url) profileFields.avatar = url;
+	if (requests && requests.length > 0) profileFields.friendRequests = requests;
+	if (interests) profileFields.interests = interests;
 
 	const foundProfile = await Profile.findById(req.user.id);
+	//connect profile to use model
 	const foundUser = await User.findById(req.user.id);
 
 	if (foundProfile) {
@@ -81,10 +84,5 @@ router.get('/authenticateupload', async (req, res) => {
 		res.status(500).json({ msg: 'Internal Server Error' });
 	}
 });
-
-//@route POST route
-//@desc create profile
-//@access private
-router.post('/createprofile', check());
 
 module.exports = router;

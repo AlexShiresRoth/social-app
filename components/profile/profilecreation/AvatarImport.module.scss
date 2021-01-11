@@ -1,4 +1,5 @@
 @import '../../../sass/variables';
+@import '../../../sass/mixins';
 
 .slide {
 	display: flex;
@@ -12,7 +13,6 @@
 	}
 	& .img_container {
 		width: 100%;
-		background: #eee;
 		border-radius: 5px;
 		padding: 5rem 0;
 		display: flex;
@@ -20,6 +20,7 @@
 		align-items: center;
 		justify-content: center;
 		border: 4px solid transparent;
+		@include theme-colors-fade($theme-dark: false, $background-fade: true);
 		& svg {
 			width: 5rem;
 			size: 3rem;
@@ -39,44 +40,13 @@
 		padding: 1rem 0;
 		margin-top: 2rem;
 		& .save_btn {
-			padding: 0.7rem 2.5rem;
-			background: $brand-success;
-			border-radius: 5px;
-			border: 0;
-			box-shadow: 0 1px 4px #999;
-			color: #fff;
-			transition: all 0.3s ease;
-			&:hover {
-				cursor: pointer;
-				box-shadow: 0 0 0 0 transparent;
-			}
+			@include primary-btn($brand-success, $brand-text-light);
 		}
 		& .next_btn {
-			padding: 0.7rem 2.5rem;
-			background: $brand-main;
-			border-radius: 5px;
-			border: 0;
-			box-shadow: 0 1px 4px #112;
-			color: #fff;
-			transition: all 0.3s ease;
-			&:hover {
-				cursor: pointer;
-				box-shadow: 0 0 0 0 transparent;
-			}
+			@include primary-btn($brand-main, $brand-text-light);
 		}
-		& .skip_btn {
-			padding: 0.7rem 2.5rem;
-			background: $brand-accent;
-			border-radius: 5px;
-			border: 0;
-			box-shadow: 0 1px 4px #999;
-			color: #fff;
-			transition: all 0.3s ease;
-			&:hover {
-				cursor: pointer;
-				box-shadow: 0 0 0 0 transparent;
-				background: $brand-accent-faded;
-			}
+		& .back_btn {
+			@include primary-btn($brand-contrast, $brand-text-light);
 		}
 	}
 }

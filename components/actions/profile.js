@@ -1,5 +1,5 @@
 import api from '../../utils/api';
-import { GET_PROFILE, PROFILE_ERROR, SEARCH_FRIENDS, UPLOAD_AVATAR } from './types';
+import { GET_PROFILE, PROFILE_ERROR, LOAD_PEOPLE, UPLOAD_AVATAR, CREATE_PROFILE, CREATE_PROFILE_ERROR } from './types';
 
 export const getMyProfile = () => async (dispatch) => {
 	try {
@@ -35,13 +35,28 @@ export const uploadAvatarToStorage = (url) => async (dispatch) => {
 	}
 };
 
-export const searchFriends = (text) => async (dispatch) => {
-	const body = { searchTerm: text };
+export const createProfile = (profile) => async (dispatch) => {
 	try {
-		const res = await api.post('/users/searchusers', body);
+		const res = await api.post('/profiles/createprofile', profile);
 
 		dispatch({
-			type: SEARCH_FRIENDS,
+			type: CREATE_PROFILE,
+			payload: res.data,
+		});
+	} catch (error) {
+		dispatch({
+			type: CREATE_PROFILE_ERROR,
+			payload: error,
+		});
+	}
+};
+
+export const loadPeople = () => async (dispatch) => {
+	try {
+		const res = await api.get('/users/getpeople');
+
+		dispatch({
+			type: LOAD_PEOPLE,
 			payload: res.data,
 		});
 	} catch (error) {

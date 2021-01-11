@@ -26,6 +26,19 @@ const ProfileSchema = new Schema({
 			},
 		},
 	],
+	friendRequests: [
+		{
+			handle: {
+				type: String,
+			},
+			email: {
+				type: String,
+			},
+			requestStatus: {
+				type: Boolean,
+			},
+		},
+	],
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

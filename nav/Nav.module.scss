@@ -1,12 +1,19 @@
 @import '../sass/variables.scss';
+@import '../sass/mixins';
 
+$theme-dark: false;
+$background-fade: true;
 .nav {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 5rem;
-	border: 1px solid #eee;
-
+	background: #fff;
+	@if $theme-dark == true {
+		border-bottom: 1px solid $brand-dark-mode-accent-faded;
+	} @else {
+		border-bottom: 1px solid $brand-accent-faded;
+	}
 	& .inner {
 		width: 90%;
 		display: flex;
@@ -14,12 +21,6 @@
 		align-items: center;
 		& .nav_left {
 			& a {
-				text-decoration: none;
-				font-family: futura-pt, sans-serif;
-				font-weight: 800;
-				font-style: normal;
-				color: $brand-main;
-				font-size: 1.5rem;
 				& img {
 					max-width: 10rem;
 				}
@@ -29,6 +30,7 @@
 			& a {
 				text-decoration: none;
 				margin: 0 0.5rem;
+				@include theme-text-colors($theme-dark);
 				&:hover {
 					cursor: pointer;
 				}

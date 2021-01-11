@@ -121,24 +121,15 @@ router.post('/edit', auth, async (req, res) => {
 //@desc get all users
 //@access private
 
-//TODO figure out why only returning one user
-router.post('/searchusers', auth, async (req, res) => {
+router.get('/getpeople', auth, async (req, res) => {
 	const foundUsers = await User.find();
-
-	const { searchTerm } = req.body;
 
 	if (foundUsers.length === 0 || !foundUsers) {
 		return res.status(400).json({ msg: 'Could not locate users' });
 	}
 
 	try {
-		const searchReg = new RegExp(searchTerm, 'i');
-
-		const matches = foundUsers.map((user) => {
-			console.log(user.handle);
-			return searchReg.match(user.handle);
-		});
-		res.json(matches);
+		res.json(foundUsers);
 	} catch (error) {
 		res.status(500).json({ msg: 'Internal Server Error' });
 	}

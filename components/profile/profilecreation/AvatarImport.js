@@ -5,10 +5,13 @@ import { IKImage, IKContext, IKUpload } from 'imagekitio-react';
 import { uploadAvatarToStorage } from '../../actions/profile';
 import { connect } from 'react-redux';
 import style from './AvatarImport.module.scss';
+import LoadingSpinner from '../../loadingspinner/LoadingSpinner';
 
-const AvatarImport = ({ changeIndex, key, uploadAvatarToStorage, profile: { myProfile, profileErrors, loading } }) => {
+const AvatarImport = ({ changeIndex, key, handleProfileData, processing }) => {
 	const [file, setFile] = useState('');
 	const [path, setPath] = useState('');
+	const [savedImg, setSavedImg] = useState('');
+	const [imgHasSaved, setSaved] = useState(false);
 	const onError = (err) => {
 		console.log('Error');
 		console.log(err);
@@ -26,9 +29,30 @@ const AvatarImport = ({ changeIndex, key, uploadAvatarToStorage, profile: { myPr
 		e.preventDefault();
 
 		if (file) {
-			uploadAvatarToStorage(file);
+			handleProfileData({ file });
+			setSaved(true);
 		}
 	};
+
+	//load image from storage only upon component mount
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const fileInStorage = window.localStorage.getItem('url');
+			console.log(fileInStorage);
+			if (fileInStorage) {
+				setSavedImg(fileInStorage);
+				setSaved(true);
+			}
+		}
+	}, []);
+
+	//check to see if there has been a saved image in storage inorder to toggle button meanings
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const fileInStorage = window.localStorage.getItem('url');
+			if (fileInStorage) setSaved(true);
+		}
+	}, [window.localStorage]);
 
 	return (
 		<div className={style.slide} key={key}>
@@ -41,7 +65,7 @@ const AvatarImport = ({ changeIndex, key, uploadAvatarToStorage, profile: { myPr
 					transformationPosition="path"
 					authenticationEndpoint="http://localhost:5000/api/profiles/authenticateupload"
 				>
-					{path ? (
+					{path && !savedImg ? (
 						<IKImage
 							path={path.toString()}
 							transformation={[
@@ -51,6 +75,8 @@ const AvatarImport = ({ changeIndex, key, uploadAvatarToStorage, profile: { myPr
 								},
 							]}
 						/>
+					) : savedImg && !path ? (
+						<IKImage src={savedImg} style={{ maxWidth: '250px' }} />
 					) : (
 						<Image />
 					)}
@@ -59,12 +85,25 @@ const AvatarImport = ({ changeIndex, key, uploadAvatarToStorage, profile: { myPr
 			</div>
 
 			<div className={style.buttons}>
-				<button className={style.save_btn} onPointerDown={(e) => handleAvatarSave(e)}>
-					Save
-				</button>
-				<button className={style.next_btn} onPointerDown={(e) => changeIndex((prevIndex) => prevIndex + 1)}>
-					Next
-				</button>
+				{!processing ? (
+					<>
+						<button className={style.save_btn} onPointerDown={(e) => handleAvatarSave(e)}>
+							Save
+						</button>
+						<div className={style.buttons__right}>
+							<button
+								className={style.next_btn}
+								onPointerDown={(e) => changeIndex((prevIndex) => prevIndex + 1)}
+							>
+								{imgHasSaved ? 'Continue' : 'Skip'}
+							</button>
+						</div>
+					</>
+				) : (
+					<>
+						<LoadingSpinner /> <p>Saving...</p>{' '}
+					</>
+				)}
 			</div>
 		</div>
 	);

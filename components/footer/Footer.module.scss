@@ -1,5 +1,14 @@
+@import '../../sass/mixins';
+@import '../../sass/variables';
+
+$theme-dark: false;
+
 .footer {
 	min-height: 30vh;
 	display: flex;
-	margin-top: 5rem;
+	padding-top: 5rem;
+	@include theme-colors($theme-dark);
+	@if $theme-dark == true {
+		border-top: 1px solid $brand-dark-mode-accent-faded;
+	}
 }

@@ -1,4 +1,5 @@
 @import '../../../sass/variables';
+@import '../../../sass/mixins';
 
 .slide {
 	display: flex;
@@ -10,7 +11,44 @@
 	& p {
 		color: #666;
 	}
-
+	& .form_container {
+		margin: 1rem 0;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		& label {
+			margin-bottom: 0.5rem;
+		}
+	}
+	& .people_results {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-height: 30vh;
+		width: 100%;
+		&__content {
+			display: flex;
+			flex-direction: column;
+			width: 90%;
+			padding: 1.5rem;
+			box-shadow: inset 0px 0px 2px #eee;
+			@include theme-colors-fade($theme-dark: false, $background-fade: true);
+			& .person_row {
+				border-bottom: 1px solid #eee;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				& .avatar_container {
+					max-width: 1.5rem;
+					& img {
+						max-width: 100%;
+						object-fit: contain;
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+	}
 	& .buttons {
 		width: 100%;
 		border-top: 1px solid #eee;
@@ -20,43 +58,17 @@
 		padding: 1rem 0;
 		margin-top: 2rem;
 		& .save_btn {
-			padding: 0.7rem 2.5rem;
-			background: $brand-success;
-			border-radius: 5px;
-			border: 0;
-			box-shadow: 0 1px 4px #999;
-			color: #fff;
-			transition: all 0.3s ease;
-			&:hover {
-				cursor: pointer;
-				box-shadow: 0 0 0 0 transparent;
-			}
+			@include primary-btn($brand-success, $brand-text-light);
 		}
 		& .next_btn {
-			padding: 0.7rem 2.5rem;
-			background: $brand-main;
-			border-radius: 5px;
-			border: 0;
-			box-shadow: 0 1px 4px #112;
-			color: #fff;
-			transition: all 0.3s ease;
-			&:hover {
-				cursor: pointer;
-				box-shadow: 0 0 0 0 transparent;
-			}
+			@include primary-btn($brand-main, $brand-text-light);
 		}
-		& .skip_btn {
-			padding: 0.7rem 2.5rem;
-			background: $brand-accent;
-			border-radius: 5px;
-			border: 0;
-			box-shadow: 0 1px 4px #999;
-			color: #fff;
-			transition: all 0.3s ease;
-			&:hover {
-				cursor: pointer;
-				box-shadow: 0 0 0 0 transparent;
-				background: $brand-accent-faded;
+		& .back_btn {
+			@include primary-btn($brand-contrast, $brand-text-light);
+		}
+		&__right {
+			& button {
+				margin: 0 1rem;
 			}
 		}
 	}

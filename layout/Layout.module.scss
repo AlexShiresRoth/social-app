@@ -1,5 +1,11 @@
+@import '../sass/mixins';
+@import '../sass/variables';
+
+$theme-dark: false;
+$background-fade: true;
 .main {
 	height: 100vh;
 	overflow: hidden;
 	overflow-y: scroll;
+	@include theme-colors-fade($theme-dark, $background-fade);
 }

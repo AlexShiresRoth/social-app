@@ -6,7 +6,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: $brand-main-faded;
 	& .db_grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);

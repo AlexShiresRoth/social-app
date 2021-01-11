@@ -4,20 +4,43 @@ import style from './ProfileCreation.module.scss';
 import AvatarImport from './profilecreation/AvatarImport';
 import { X } from 'react-feather';
 import SearchFriends from './profilecreation/SearchFriends';
-const ProfileCreation = ({ toggleProfileForm, profileFormVisible }) => {
+import Interests from './profilecreation/Interests';
+const ProfileCreation = ({ toggleProfileForm, profileFormVisible, handleProfileData, processing }) => {
 	const [currentIndex, changeIndex] = useState(0);
 
 	const steps = [
 		{
-			component: <AvatarImport style={style} changeIndex={changeIndex} key={0} />,
+			component: (
+				<AvatarImport
+					style={style}
+					changeIndex={changeIndex}
+					key={0}
+					handleProfileData={handleProfileData}
+					processing={processing}
+				/>
+			),
 			progNum: '1. Add Avatar',
 		},
 		{
-			component: <SearchFriends changeIndex={changeIndex} key={1} />,
+			component: (
+				<SearchFriends
+					changeIndex={changeIndex}
+					key={1}
+					handleProfileData={handleProfileData}
+					processing={processing}
+				/>
+			),
 			progNum: '2. Find pals',
 		},
 		{
-			component: <AvatarImport style={style} changeIndex={changeIndex} key={2} />,
+			component: (
+				<Interests
+					changeIndex={changeIndex}
+					key={2}
+					handleProfileData={handleProfileData}
+					processing={processing}
+				/>
+			),
 			progNum: '3. Add Interests',
 		},
 		{
@@ -28,7 +51,6 @@ const ProfileCreation = ({ toggleProfileForm, profileFormVisible }) => {
 
 	return (
 		<div className={style.profile_onboarding}>
-			{/* create a heading showing step progression */}
 			<div className={style.onboarding}>
 				<div className={style.onboarding__inner}>
 					<div className={style.onboarding__inner__heading}>
@@ -56,7 +78,7 @@ const ProfileCreation = ({ toggleProfileForm, profileFormVisible }) => {
 							</div>
 							<div
 								className={style.progress_bar__inner}
-								style={{ width: `${currentIndex === 0 ? '2%' : (currentIndex / steps.length) * 100}%` }}
+								style={{ width: `${(currentIndex / steps.length) * 100}%` }}
 							></div>
 						</div>
 					</div>

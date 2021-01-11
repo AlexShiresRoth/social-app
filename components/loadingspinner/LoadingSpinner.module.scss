@@ -1,14 +1,14 @@
 @import '../../sass/variables';
 
 .spinner {
-	height: 2rem;
-	width: 2rem;
+	height: 1.5rem;
+	width: 1.5rem;
 	border: 2px solid transparent;
-	border-top: 2px solid $brand-main;
-	border-bottom: 2px solid $brand-main;
+	border-top: 2px solid $brand-accent;
+	border-bottom: 2px solid $brand-accent;
 	border-radius: 50%;
 	display: block;
-	animation: spin 1s linear infinite;
+	animation: spin 0.5s linear infinite;
 }
 
 @keyframes spin {
