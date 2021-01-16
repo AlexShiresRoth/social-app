@@ -19,6 +19,19 @@
 		& label {
 			margin-bottom: 0.5rem;
 		}
+		& input {
+			padding: 0.5rem 0;
+			border-radius: 3px;
+			border: 0;
+			border: 3px solid transparent;
+			border-bottom: 3px solid $brand-accent;
+			transition: all 0.3s ease;
+			text-indent: 10px;
+			@include theme-colors-fade($theme-dark: false, $background-fade: true);
+			&:hover {
+				border: 3px solid $brand-main;
+			}
+		}
 	}
 	& .people_results {
 		display: flex;
@@ -29,8 +42,9 @@
 		&__content {
 			display: flex;
 			flex-direction: column;
-			width: 90%;
-			padding: 1.5rem;
+			align-items: center;
+			width: 100%;
+			border-radius: 3px;
 			box-shadow: inset 0px 0px 2px #eee;
 			@include theme-colors-fade($theme-dark: false, $background-fade: true);
 			& .person_row {
@@ -38,6 +52,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				width: 90%;
 				& .avatar_container {
 					max-width: 1.5rem;
 					& img {
@@ -45,6 +60,13 @@
 						object-fit: contain;
 						border-radius: 50%;
 					}
+				}
+				& p {
+					color: $brand-text-dark;
+				}
+				& button {
+					letter-spacing: 1.5px;
+					@include request-btn($brand-main, $brand-text-light);
 				}
 			}
 		}

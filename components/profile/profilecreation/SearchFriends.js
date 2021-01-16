@@ -5,10 +5,32 @@ import { connect } from 'react-redux';
 
 const SearchFriends = ({ changeIndex, profile: { people, loadingPeople } }) => {
 	const [searchTerm, setTerm] = useState('');
-
+	const [matches, setMatches] = useState([...people]);
 	const onChange = (e) => setTerm(e.target.value);
 
-	console.log(people);
+	const locateMatches = (term) => {
+		const regex = new RegExp('^' + term, 'i');
+		if (people.length > 0) {
+			const foundPeople = people.filter((person, i) => {
+				return regex.test(person.handle) || regex.test(person.name);
+			});
+			console.log(foundPeople);
+			setMatches(foundPeople);
+			return foundPeople;
+		}
+	};
+
+	const sendFriendRequest = () => {};
+
+	useEffect(() => {
+		if (searchTerm !== '') {
+			locateMatches(searchTerm);
+		}
+		if (searchTerm === '') {
+			setMatches(people);
+		}
+	}, [searchTerm, people]);
+
 	return (
 		<div className={style.slide}>
 			<div className={style.form_container}>
@@ -25,17 +47,21 @@ const SearchFriends = ({ changeIndex, profile: { people, loadingPeople } }) => {
 			<div className={style.people_results}>
 				<div class={style.people_results__content}>
 					{!loadingPeople ? (
-						people.map((person, i) => {
-							return (
-								<div className={style.person_row} key={i}>
-									<div className={style.avatar_container}>
-										<img src={`${person.avatar}`} alt={`${person.handle}'s avatar`} />
+						matches.length > 0 ? (
+							matches.map((person, i) => {
+								return (
+									<div className={style.person_row} key={i}>
+										<div className={style.avatar_container}>
+											<img src={`${person.avatar}`} alt={`${person.handle}'s avatar`} />
+										</div>
+										<p>{person.handle}</p>
+										<button>Send Request</button>
 									</div>
-									<p>{person.handle}</p>
-									<button>Send Request</button>
-								</div>
-							);
-						})
+								);
+							})
+						) : (
+							<p>Could not locate anyone with that name</p>
+						)
 					) : (
 						<p>Loading People!</p>
 					)}

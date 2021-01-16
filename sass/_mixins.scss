@@ -13,7 +13,9 @@
 	font-weight: 800;
 	font-style: normal;
 }
-
+////////////////////////////////////////////////////
+//////////BUTTONS//////////////////////////////////
+////////////////////////////////
 @mixin primary-btn($color, $text-color) {
 	background: $color;
 	color: $text-color;
@@ -23,6 +25,21 @@
 	border: 0;
 	transition: all 0.3s ease;
 	font-size: 1rem;
+	box-shadow: 0 1px 20px rgba(109, 107, 107, 0.308);
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 0 0 0 transparent;
+	}
+}
+@mixin request-btn($color, $text-color) {
+	background: $color;
+	color: $text-color;
+	padding: 0.65rem 1rem;
+	min-width: 4rem;
+	border-radius: 3px;
+	border: 0;
+	transition: all 0.3s ease;
+	font-size: 0.7rem;
 	box-shadow: 0 1px 20px rgba(109, 107, 107, 0.308);
 	&:hover {
 		cursor: pointer;
@@ -43,7 +60,7 @@
 @mixin theme-colors-fade($theme-dark: true, $background-fade: true) {
 	@if $theme-dark == true and $background-fade == true {
 		background-color: $brand-dark-mode-faded;
-	} @else if $theme-dark != true and $background-fade {
+	} @else if $theme-dark != true and $background-fade == true {
 		background-color: $brand-accent-faded;
 	}
 }
