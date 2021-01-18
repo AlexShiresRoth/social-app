@@ -1,5 +1,14 @@
 import api from '../../utils/api';
-import { GET_PROFILE, PROFILE_ERROR, LOAD_PEOPLE, UPLOAD_AVATAR, CREATE_PROFILE, CREATE_PROFILE_ERROR } from './types';
+import {
+	GET_PROFILE,
+	PROFILE_ERROR,
+	LOAD_PEOPLE,
+	UPLOAD_AVATAR,
+	CREATE_PROFILE,
+	CREATE_PROFILE_ERROR,
+	SEND_FRIEND_REQUEST,
+	FRIEND_REQUEST_ERROR,
+} from './types';
 
 export const getMyProfile = () => async (dispatch) => {
 	try {
@@ -63,6 +72,24 @@ export const loadPeople = () => async (dispatch) => {
 		console.error(error);
 		dispatch({
 			type: PROFILE_ERROR,
+			payload: error,
+		});
+	}
+};
+
+export const sendFriendRequest = (requestId) => async (dispatch) => {
+	const body = JSON.stringify({ requestId });
+	try {
+		const res = await api.post('/profiles/sendrequest', body);
+
+		dispatch({
+			type: SEND_FRIEND_REQUEST,
+			payload: res.data,
+		});
+	} catch (error) {
+		console.error(error);
+		dispatch({
+			type: FRIEND_REQUEST_ERROR,
 			payload: error,
 		});
 	}

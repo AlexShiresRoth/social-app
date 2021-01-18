@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import style from './LoginForm.module.scss';
 import { signIn } from '../actions/auth';
-import Router from 'next/router';
-import { withRouter } from 'next/dist/client/router';
+
+import { useRouter, withRouter } from 'next/router';
 import { connect } from 'react-redux';
 
 const LoginForm = ({ signIn, history, auth: { isAuthenticated } }) => {
+	const router = useRouter();
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -23,7 +24,7 @@ const LoginForm = ({ signIn, history, auth: { isAuthenticated } }) => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			Router.push('/Dashboard');
+			router.push('/dashboard');
 		}
 	}, [isAuthenticated]);
 	return (

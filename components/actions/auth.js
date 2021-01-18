@@ -47,7 +47,7 @@ export const signIn = (formData) => async (dispatch) => {
 				type: AUTH_ERROR,
 				payload: errors.forEach((err) => err.msg),
 			});
-			errors.forEach((err) => dispatchsetAlert(err.msg, 'danger'));
+			errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
 		}
 		dispatch({
 			type: AUTH_ERROR,

@@ -68,6 +68,14 @@
 					letter-spacing: 1.5px;
 					@include request-btn($brand-main, $brand-text-light);
 				}
+				& .disabled_btn {
+					background: #eee;
+					color: #666;
+					box-shadow: 0 0 0;
+					&:hover {
+						cursor: not-allowed;
+					}
+				}
 			}
 		}
 	}

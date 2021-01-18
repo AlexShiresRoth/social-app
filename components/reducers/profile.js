@@ -5,6 +5,7 @@ const {
 	LOAD_PEOPLE,
 	CREATE_PROFILE_ERROR,
 	CREATE_PROFILE,
+	SEND_FRIEND_REQUEST,
 } = require('../actions/types');
 
 const initialState = {
@@ -16,6 +17,8 @@ const initialState = {
 	loadingPeople: true,
 	createProfileError: null,
 	newProfileData: null,
+	friendRequestErrors: null,
+	userData: null,
 };
 
 export default (state = initialState, action) => {
@@ -39,6 +42,13 @@ export default (state = initialState, action) => {
 				...state,
 				myProfile: payload,
 				loadingProfile: false,
+				loading: false,
+			};
+		case SEND_FRIEND_REQUEST:
+			return {
+				...state,
+				people: payload,
+				friendRequestErrors: null,
 				loading: false,
 			};
 		case LOAD_PEOPLE:

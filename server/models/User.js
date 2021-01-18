@@ -26,17 +26,27 @@ const UserSchema = new mongoose.Schema({
 	avatar: {
 		type: String,
 	},
-	pals: [
+	friendRequestsReceived: [
 		{
-			userHandle: {
+			fromPersonId: {
 				type: String,
+				required: true,
 			},
-			userAvatar: {
+		},
+	],
+	friendRequestsSent: [
+		{
+			toPersonId: {
 				type: String,
+				required: true,
 			},
-			acceptDate: {
-				type: Date,
-				default: Date.now,
+		},
+	],
+	friendRequestsApproved: [
+		{
+			acceptedPersonId: {
+				type: String,
+				required: true,
 			},
 		},
 	],

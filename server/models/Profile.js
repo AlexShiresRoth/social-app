@@ -26,16 +26,10 @@ const ProfileSchema = new Schema({
 			},
 		},
 	],
-	friendRequests: [
+	pals: [
 		{
 			handle: {
 				type: String,
-			},
-			email: {
-				type: String,
-			},
-			requestStatus: {
-				type: Boolean,
 			},
 		},
 	],

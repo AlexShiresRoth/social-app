@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import style from './SignupComponent.module.scss';
 import { signup } from '../actions/auth';
 import { connect } from 'react-redux';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 const SignupComponent = ({ auth: { isAuthenticated }, signup }) => {
+	const router = useRouter();
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -23,7 +24,7 @@ const SignupComponent = ({ auth: { isAuthenticated }, signup }) => {
 	};
 
 	if (isAuthenticated) {
-		Router.push('/Dashboard');
+		router.push('/dashboard');
 	}
 
 	return (
@@ -85,7 +86,7 @@ const SignupComponent = ({ auth: { isAuthenticated }, signup }) => {
 					</div>
 					<div className={style.button_col}>
 						<button className={style.login_btn} onSubmit={(e) => formSubmit(e)}>
-							Login
+							Submit
 						</button>
 					</div>
 				</div>

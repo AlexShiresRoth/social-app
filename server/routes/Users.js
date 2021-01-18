@@ -74,7 +74,7 @@ router.post(
 			console.log(newUser);
 			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
 				if (err) throw err;
-				res.json({ token });
+				res.json(token);
 			});
 		} catch (error) {
 			console.log(error);
@@ -120,16 +120,19 @@ router.post('/edit', auth, async (req, res) => {
 //@route GET route
 //@desc get all users
 //@access private
-
 router.get('/getpeople', auth, async (req, res) => {
-	const foundUsers = await User.find();
+	const foundPeople = await User.find();
+	console.log("it's me!", foundPeople);
 
-	if (foundUsers.length === 0 || !foundUsers) {
+	if (foundPeople.length === 0 || !foundPeople) {
 		return res.status(400).json({ msg: 'Could not locate users' });
 	}
 
 	try {
-		res.json(foundUsers);
+		const peopleNotIncludingMyProfile = foundPeople.filter((person) => {
+			return person.id !== req.user.id;
+		});
+		res.json(peopleNotIncludingMyProfile);
 	} catch (error) {
 		res.status(500).json({ msg: 'Internal Server Error' });
 	}

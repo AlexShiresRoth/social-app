@@ -7,8 +7,19 @@ import ProfileCreation from './ProfileCreation';
 import LoadingSpinner from '../loadingspinner/LoadingSpinner';
 import style from './Profile.module.scss';
 import ProfileSvg from './svgs/ProfileSvg';
+import { useRouter } from 'next/router';
 
-const Profile = ({ getMyProfile, loadPeople, profile: { myProfile, loading, loadingProfile } }) => {
+const Profile = ({
+	getMyProfile,
+	loadPeople,
+	profile: { myProfile, loading, loadingProfile },
+	auth: { user, isAuthenticated },
+}) => {
+	const router = useRouter();
+
+	if (!isAuthenticated) {
+		router.push('/');
+	}
 	const [profileFormVisible, toggleProfileForm] = useState(false);
 	const [profileData, setProfileData] = useState({
 		url: '',
@@ -66,6 +77,7 @@ const Profile = ({ getMyProfile, loadPeople, profile: { myProfile, loading, load
 								<ProfileSvg />
 							</div>
 							<div className={style.start}>
+								<h1>Hey {user && user.handle},</h1>
 								<h2>Looks like you need a profile!</h2>
 								<button onPointerDown={(e) => toggleProfileForm(!profileFormVisible)}>
 									Click Here to Get Started
@@ -97,6 +109,7 @@ Profile.propTypes = {
 
 const mapStateToProps = (state) => ({
 	profile: state.profile,
+	auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getMyProfile, loadPeople })(Profile);
