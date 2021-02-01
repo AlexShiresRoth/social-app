@@ -1,7 +1,7 @@
 @import '../../sass/mixins';
 @import '../../sass/variables';
 
-$theme-dark: false;
+$theme-dark: true;
 
 .footer {
 	min-height: 30vh;
@@ -9,6 +9,6 @@ $theme-dark: false;
 	padding-top: 5rem;
 	@include theme-colors($theme-dark);
 	@if $theme-dark == true {
-		border-top: 1px solid $brand-dark-mode-accent-faded;
+		border-top: 2px solid lighten($brand-dark-mode, 3%);
 	}
 }

@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import style from './ProfileCreation.module.scss';
 import AvatarImport from './profilecreation/AvatarImport';
+import SaveAndCreate from './profilecreation/SaveAndCreate';
 import { X } from 'react-feather';
 import SearchFriends from './profilecreation/SearchFriends';
 import Interests from './profilecreation/Interests';
-const ProfileCreation = ({ toggleProfileForm, profileFormVisible, handleProfileData, processing }) => {
+const ProfileCreation = ({
+	toggleProfileForm,
+	profileFormVisible,
+	handleProfileData,
+	processing,
+	submitProfileData,
+}) => {
 	const [currentIndex, changeIndex] = useState(0);
 
 	const steps = [
@@ -44,7 +51,7 @@ const ProfileCreation = ({ toggleProfileForm, profileFormVisible, handleProfileD
 			progNum: '3. Add Interests',
 		},
 		{
-			component: <AvatarImport style={style} changeIndex={changeIndex} key={3} />,
+			component: <SaveAndCreate submitProfileData={submitProfileData} processing={processing} />,
 			progNum: '4. Save',
 		},
 	];

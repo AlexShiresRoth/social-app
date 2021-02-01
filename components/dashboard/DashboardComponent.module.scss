@@ -16,9 +16,8 @@
 			min-width: 25vw;
 			min-height: 30vh;
 			padding: 1rem;
-			background: #fff;
 			border-radius: 5px;
-			box-shadow: 0 1px 20px darken($brand-main-faded, 5%);
+			border: 2px solid lighten($brand-dark-mode, 3%);
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
@@ -26,26 +25,26 @@
 				font-size: 1.9vw;
 			}
 			& .color_one {
-				color: $brand-main;
+				color: $brand-dark-mode-text;
 			}
 			& .color_two {
-				color: $brand-accent;
+				color: $brand-dark-mode-text;
 			}
 			& .color_three {
-				color: $brand-contrast;
+				color: $brand-dark-mode-text;
 			}
 			& button {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				background: $brand-main;
+				background: $brand-dark-mode-accent;
 				border: 0;
 				border-radius: 5px;
 				color: #fff;
 				height: 3rem;
 				font-size: 1vw;
 				width: 6vw;
-				box-shadow: 0 1px 10px darken($brand-main, 5%);
+				box-shadow: 0 1px 10px 3px lighten($brand-dark-mode, 2%);
 				transition: all 0.3s ease;
 				text-transform: uppercase;
 				&:hover {

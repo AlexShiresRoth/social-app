@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getMyProfile, loadPeople } from '../actions/profile';
+import { createProfile, getMyProfile, loadPeople } from '../actions/profile';
 import { connect } from 'react-redux';
 import MyProfile from './MyProfile';
 import ProfileCreation from './ProfileCreation';
@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 const Profile = ({
 	getMyProfile,
 	loadPeople,
+	createProfile,
 	profile: { myProfile, loading, loadingProfile },
 	auth: { user, isAuthenticated },
 }) => {
@@ -23,7 +24,6 @@ const Profile = ({
 	const [profileFormVisible, toggleProfileForm] = useState(false);
 	const [profileData, setProfileData] = useState({
 		url: '',
-		requests: [],
 		interests: [],
 	});
 	const [processing, setProcessing] = useState(false);
@@ -33,26 +33,39 @@ const Profile = ({
 		loadPeople();
 	}, []);
 
-	const { url, requests, interests } = profileData;
+	const { url, interests } = profileData;
 
-	const handleProfileData = ({ file = null, requests = [], interests = [] }) => {
-		console.log(file);
+	const handleProfileData = ({ file = null, interests = [] }) => {
 		setProcessing(true);
 		setProfileData((prevData) => ({
 			...prevData,
 			url: file ? file : prevData.url,
-			requests: requests.length > 0 ? requests : prevData.requests,
 			interests: interests.length > 0 ? interests : prevData.interests,
 		}));
+	};
+
+	//TODO clean this so if people alter localstorage
+	const submitProfileData = (e) => {
+		e.preventDefault();
+		const fromStorageInterests =
+			window.localStorage.getItem('interests').length > 0
+				? window.localStorage.getItem('interests').split(',')
+				: null;
+		const avatarUrl = window.localStorage.getItem('url') ? window.localStorage.getItem('url') : null;
+		const profileBody = {
+			interests: fromStorageInterests,
+			url: avatarUrl,
+		};
+		setProcessing(true);
+		createProfile(profileBody);
 	};
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			window.localStorage.setItem('url', url);
-			window.localStorage.setItem('requests', requests);
 			window.localStorage.setItem('interests', interests);
 		}
-	}, [url, requests, interests]);
+	}, [url, interests]);
 
 	useEffect(() => {
 		if (processing) {
@@ -90,6 +103,7 @@ const Profile = ({
 								toggleProfileForm={toggleProfileForm}
 								handleProfileData={handleProfileData}
 								processing={processing}
+								submitProfileData={submitProfileData}
 							/>
 						) : null}
 					</>
@@ -112,4 +126,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getMyProfile, loadPeople })(Profile);
+export default connect(mapStateToProps, { getMyProfile, loadPeople, createProfile })(Profile);

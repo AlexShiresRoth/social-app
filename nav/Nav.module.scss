@@ -1,18 +1,18 @@
 @import '../sass/variables.scss';
 @import '../sass/mixins';
 
-$theme-dark: false;
+$theme-dark: true;
 $background-fade: true;
 .nav {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 5rem;
-	background: #fff;
+	@include theme-colors($theme-dark);
 	@if $theme-dark == true {
-		border-bottom: 1px solid $brand-dark-mode-accent-faded;
+		border-bottom: 2px solid lighten($brand-dark-mode, 3%);
 	} @else {
-		border-bottom: 1px solid $brand-accent-faded;
+		border-bottom: 2px solid $brand-accent-faded;
 	}
 	& .inner {
 		width: 90%;

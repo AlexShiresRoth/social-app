@@ -45,8 +45,10 @@ export const uploadAvatarToStorage = (url) => async (dispatch) => {
 };
 
 export const createProfile = (profile) => async (dispatch) => {
+	const body = JSON.stringify({ ...profile });
 	try {
-		const res = await api.post('/profiles/createprofile', profile);
+		console.log(body);
+		const res = await api.post('/profiles/createprofile', body);
 
 		dispatch({
 			type: CREATE_PROFILE,

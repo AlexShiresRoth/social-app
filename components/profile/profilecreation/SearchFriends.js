@@ -55,6 +55,7 @@ const SearchFriends = ({ changeIndex, profile: { people, loadingPeople }, sendFr
 					triggerFriendRequest={triggerFriendRequest}
 					i={i}
 					user={user}
+					processing={processing}
 				/>
 			);
 		});

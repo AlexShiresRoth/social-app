@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LoadingSpinner from '../../loadingspinner/LoadingSpinner';
 
-const People = ({ style, person, triggerFriendRequest, i, user }) => {
+const People = ({ style, person, triggerFriendRequest, i, user, processing }) => {
 	return (
 		<div className={style.person_row} key={i}>
 			<div className={style.avatar_container}>

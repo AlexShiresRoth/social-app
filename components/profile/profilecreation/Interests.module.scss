@@ -1,0 +1,78 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+.form_container {
+	width: 100%;
+	margin: 2rem 0;
+	display: flex;
+	flex-direction: column;
+	& p {
+		color: $brand-light-color;
+	}
+	& .inner {
+		width: 100%;
+		& .saved_interests {
+			display: flex;
+			flex-wrap: wrap;
+			& p {
+				padding: 0.5rem;
+				color: $brand-light-color;
+				background: $brand-dark-mode-bg-faded;
+				margin-right: 0.5rem;
+				border-radius: 3px;
+			}
+		}
+		& form {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			& input {
+				width: 100%;
+				resize: none;
+				border-radius: 3px;
+				margin-top: 1rem;
+				padding: 0.5rem 0;
+				border: 2px solid transparent;
+				color: $brand-light-color;
+				border-bottom: 2px solid $brand-dark-mode-text;
+				transition: all 0.3s ease;
+				text-indent: 5px;
+				background: $brand-dark-mode-bg-faded;
+				@include text-reg;
+				&:focus,
+				&:hover {
+					outline: 0px solid transparent;
+					border: 2px solid $brand-accent;
+				}
+			}
+			& button {
+				margin: 1rem 0;
+				max-width: 10rem;
+				@include request-btn($brand-dark-mode-contrast-faded, $brand-light-color);
+				font-size: 1rem;
+			}
+		}
+	}
+	& .buttons {
+		width: 100%;
+		border-top: 1px solid lighten($brand-dark-mode, 3%);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem 0;
+		margin-top: 2rem;
+		& .save_btn {
+			@include primary-btn($brand-success, $brand-text-light);
+		}
+		& .next_btn {
+			@include primary-btn($brand-dark-mode-contrast, $brand-light-color);
+		}
+		& .back_btn {
+			@include primary-btn($brand-dark-mode-accent, $brand-light-color);
+		}
+		&__right {
+			& button {
+				margin: 0 1rem;
+			}
+		}
+	}
+}

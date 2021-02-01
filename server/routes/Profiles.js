@@ -41,13 +41,15 @@ router.post('/createprofile', auth, async (req, res) => {
 		return res.json({ errors: errors.array() });
 	}
 
-	const { url, requests, interests } = req.body;
+	const { url, interests } = req.body;
 
 	const profileFields = {};
 
 	if (url) profileFields.avatar = url;
-	if (requests && requests.length > 0) profileFields.friendRequests = requests;
-	if (interests) profileFields.interests = interests;
+	if (interests)
+		profileFields.interests = interests.map((interest) => {
+			return { name: interest };
+		});
 
 	const foundProfile = await Profile.findById(req.user.id);
 	//connect profile to use model
@@ -55,6 +57,7 @@ router.post('/createprofile', auth, async (req, res) => {
 
 	if (foundProfile) {
 		foundProfile.avatar = url;
+		foundProfile.interests = interests;
 		foundProfile.save();
 		return res.json(foundProfile);
 	}
@@ -62,7 +65,8 @@ router.post('/createprofile', auth, async (req, res) => {
 		profileFields.user = req.user.id;
 		profileFields.handle = foundUser.handle;
 		profileFields.email = foundUser.email;
-		const newProfile = new Profile(profileFields);
+		console.log('slurpadurpa', url, interests);
+		const newProfile = new Profile({ ...profileFields });
 
 		await newProfile.save();
 		console.log('new profile created', newProfile);

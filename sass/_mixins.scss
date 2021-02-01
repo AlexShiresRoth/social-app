@@ -2,6 +2,7 @@
 	font-family: proxima-nova, sans-serif;
 	font-weight: 400;
 	font-style: normal;
+	font-size: 16px;
 }
 @mixin text-bold {
 	font-family: proxima-nova, sans-serif;
@@ -17,18 +18,21 @@
 //////////BUTTONS//////////////////////////////////
 ////////////////////////////////
 @mixin primary-btn($color, $text-color) {
-	background: $color;
-	color: $text-color;
+	background: transparent;
+	color: $color;
 	padding: 0.65rem 1.8rem;
 	min-width: 7rem;
 	border-radius: 3px;
 	border: 0;
 	transition: all 0.3s ease;
 	font-size: 1rem;
-	box-shadow: 0 1px 20px rgba(109, 107, 107, 0.308);
+	border: 0;
+	box-shadow: 0 0 0px 2px $color;
 	&:hover {
 		cursor: pointer;
-		box-shadow: 0 0 0 0 transparent;
+		box-shadow: 0 0 0px 5px darken($color, 10%);
+		background: $color;
+		color: $text-color;
 	}
 }
 @mixin request-btn($color, $text-color) {
@@ -40,7 +44,6 @@
 	border: 0;
 	transition: all 0.3s ease;
 	font-size: 0.7rem;
-	box-shadow: 0 1px 20px rgba(109, 107, 107, 0.308);
 	&:hover {
 		cursor: pointer;
 		box-shadow: 0 0 0 0 transparent;
@@ -61,7 +64,7 @@
 	@if $theme-dark == true and $background-fade == true {
 		background-color: $brand-dark-mode-faded;
 	} @else if $theme-dark != true and $background-fade == true {
-		background-color: $brand-accent-faded;
+		background-color: $brand-dark-mode-accent-faded;
 	}
 }
 
